@@ -3,3 +3,6 @@ const welcomeInTalkTrainer = 'Witaj w talk trainer!';
 const instruction = 'Rozwijaj swoje umiejętności językowe, ucząc się z ulubionych filmów na YouTube.\nWybierz podcast, wykład lub inne nagranie, które najbardziej Cię interesuje i po prostu powtarzaj po lektorze.';
 const searchFieldLabelText = 'Wyszukaj nagranie na YouTube';
 const emptyResults = 'Brak danych';
+const apiFailureErrorMessage = 'Nie udało się pobrać danych.';
+const savingDataFailureMessage = 'Nie udało się zapisać danych';
+const generalErrorMessage = 'Coś poszło nie tak';

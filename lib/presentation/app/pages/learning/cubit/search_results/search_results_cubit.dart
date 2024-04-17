@@ -14,9 +14,10 @@ class SearchResultsCubit extends Cubit<SearchResultsState> {
   void onSearchParamsSubmitted() async {
     emit(SearchResultsLoading());
 
-    List<SearchResultEntity> videos = await searchUseCases.getSearchResults();
-    emit(SearchResultsLoaded(videos: videos));
-
-    //emit(SearchResultsAtError(errorMessage: "No internet"));
+    final videosOrFailures = await searchUseCases.getSearchResults();
+    videosOrFailures.fold(
+      (videos) => emit(SearchResultsLoaded(videos: videos)),
+      (failure) => emit(SearchResultsAtError(errorMessage: failure.message)),
+    );
   }
 }

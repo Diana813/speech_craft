@@ -1,4 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:speech_craft/domain/entities/search_result_entity.dart';
+
+import '../failures/failures.dart';
 
 class SearchUseCases{
 
@@ -10,8 +13,8 @@ class SearchUseCases{
     SearchResultEntity(title: 'fifth', description: 'description', thumbnailUrl: '', videoId: "1"),
   ];
 
-  Future<List<SearchResultEntity>> getSearchResults() async {
+  Future<Either<List<SearchResultEntity>, Failure>> getSearchResults() async {
     await Future.delayed(const Duration(seconds: 3));
-    return _videos;
+    return left(_videos);
   }
 }
