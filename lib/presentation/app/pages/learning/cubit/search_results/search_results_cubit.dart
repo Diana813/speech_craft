@@ -1,20 +1,22 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:speech_craft/domain/use_cases/search_use_cases.dart';
 
-import '../../../../../../data/models/searchResult/search_result.dart';
+import '../../../../../../domain/entities/search_result_entity.dart';
 
 part 'search_results_state.dart';
 
 class SearchResultsCubit extends Cubit<SearchResultsState> {
   SearchResultsCubit() : super(SearchResultsInitial());
+  final SearchUseCases searchUseCases = SearchUseCases();
 
-  void onSearchResultLoading(){
+  void onSearchParamsSubmitted() async {
     emit(SearchResultsLoading());
-  }
-  void onSearchResultLoaded(List<SearchResult> videos){
+
+    List<SearchResultEntity> videos = await searchUseCases.getSearchResults();
     emit(SearchResultsLoaded(videos: videos));
-  }
-  void onSearchResultsAtError(String errorMessage){
-    emit(SearchResultsAtError(errorMessage: errorMessage));
+
+    //emit(SearchResultsAtError(errorMessage: "No internet"));
   }
 }

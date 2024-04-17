@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
-import 'package:speech_craft/presentation/app/pages/learning/search_results_screen.dart';
 import 'package:speech_craft/presentation/app/pages/learning/learning_screen.dart';
+import 'package:speech_craft/presentation/app/pages/learning/widgets/search__screen/search_results_wrapper_provider.dart';
 
 import '../../../../data/models/search_key_words.dart';
 
@@ -16,6 +16,7 @@ class LearningPage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<LearningPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +33,8 @@ class _WelcomePageState extends State<LearningPage> {
             config: <Breakpoint, SlotLayoutConfig>{
               Breakpoints.smallAndUp: SlotLayout.from(
                 key: const Key('primary-body'),
-                builder: (context) => SearchResults(searchKeyWords: widget.searchKeyWords),
+                builder: (context) => SearchResultsWrapperProvider(
+                    searchKeyWords: widget.searchKeyWords),
               ),
               Breakpoints.mediumAndUp: SlotLayout.from(
                 key: const Key('primary-body'),
@@ -44,11 +46,12 @@ class _WelcomePageState extends State<LearningPage> {
                     ),
                     Expanded(
                       flex: 2,
-                      child: SearchResults(searchKeyWords: widget.searchKeyWords),
+                      child: SearchResultsWrapperProvider(
+                          searchKeyWords: widget.searchKeyWords),
                     )
                   ],
                 ),
-              )
+              ),
             },
           ),
         ),

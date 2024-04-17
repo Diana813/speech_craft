@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:speech_craft/presentation/app/pages/learning/widgets/search__screen/search_result_item.dart';
 
-import '../../../../../../data/models/searchResult/search_result.dart';
+import '../../../../../../domain/entities/search_result_entity.dart';
 
 class SearchResultsList extends StatelessWidget {
   const SearchResultsList({
@@ -9,7 +9,7 @@ class SearchResultsList extends StatelessWidget {
     required this.videos,
   });
 
-  final List<SearchResult> videos;
+  final List<SearchResultEntity> videos;
 
   @override
   Widget build(BuildContext context) {

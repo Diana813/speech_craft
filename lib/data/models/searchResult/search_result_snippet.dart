@@ -1,22 +1,22 @@
 import 'package:speech_craft/data/models/searchResult/thumbnails.dart';
 
 class SearchResultSnippet {
-  DateTime publishedAt;
-  String channelId;
+  DateTime? publishedAt;
+  String? channelId;
   String title;
   String description;
   Thumbnails thumbnails;
-  String channelTitle;
-  String liveBroadcastContent;
+  String? channelTitle;
+  String? liveBroadcastContent;
 
   SearchResultSnippet({
-    required this.publishedAt,
-    required this.channelId,
+    this.publishedAt,
+    this.channelId,
     required this.title,
     required this.description,
     required this.thumbnails,
-    required this.channelTitle,
-    required this.liveBroadcastContent,
+    this.channelTitle,
+    this.liveBroadcastContent,
   });
 
   factory SearchResultSnippet.fromJson(Map<String, dynamic> json) {

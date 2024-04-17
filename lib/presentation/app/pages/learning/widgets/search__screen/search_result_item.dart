@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../data/models/searchResult/search_result.dart';
+import '../../../../../../domain/entities/search_result_entity.dart';
 
 class SearchResultItemWidget extends StatelessWidget {
-  final SearchResult result;
+  final SearchResultEntity result;
   final Function onTap;
 
   const SearchResultItemWidget(
@@ -15,11 +15,11 @@ class SearchResultItemWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
         tileColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text(result.snippet.title,
+        title: Text(result.title,
             style: Theme.of(context).textTheme.titleSmall),
-        subtitle: Text(result.snippet.description,
+        subtitle: Text(result.description,
             style: Theme.of(context).textTheme.bodySmall),
-        leading: Image.network(result.snippet.thumbnails.defaultThumbnail.url),
+        leading: Image.network(result.thumbnailUrl),
         onTap: () => onTap(),
       ),
     );
