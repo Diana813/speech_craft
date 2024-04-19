@@ -6,3 +6,6 @@ const emptyResults = 'Brak danych';
 const apiFailureErrorMessage = 'Nie udało się pobrać danych.';
 const savingDataFailureMessage = 'Nie udało się zapisać danych';
 const generalErrorMessage = 'Coś poszło nie tak';
+
+const String googleBaseUrl = 'www.googleapis.com';
+const String youtubeEndpoint = '/youtube/v3/search';

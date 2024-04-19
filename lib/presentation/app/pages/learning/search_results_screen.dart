@@ -6,13 +6,14 @@ import 'package:speech_craft/presentation/app/pages/learning/cubit/search_result
 import 'package:speech_craft/presentation/app/pages/learning/widgets/search__screen/search_results_list.dart';
 
 class SearchResults extends StatelessWidget {
-  const SearchResults({super.key, this.searchKeyWords});
+  const SearchResults({super.key, required this.searchKeyWords});
 
   final SearchKeyWords? searchKeyWords;
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<SearchResultsCubit>(context).onSearchParamsSubmitted();
+    final args = ModalRoute.of(context)!.settings.arguments as SearchKeyWords;
+    BlocProvider.of<SearchResultsCubit>(context).onSearchParamsSubmitted(keywords: args.searchFraze);
 
     return BlocBuilder<SearchResultsCubit, SearchResultsState>(
       builder: (context, state) {

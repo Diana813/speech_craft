@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:speech_craft/data/models/searchResult/search_result_id.dart';
 import 'package:speech_craft/data/models/searchResult/search_result_snippet.dart';
 
-class SearchResult {
-  String kind;
-  String etag;
-  SearchResultId id;
-  SearchResultSnippet snippet;
+class SearchResult extends Equatable {
+  final String kind;
+  final String etag;
+  final SearchResultId id;
+  final SearchResultSnippet snippet;
 
   SearchResult({
     required this.kind,
@@ -22,4 +23,7 @@ class SearchResult {
       snippet: SearchResultSnippet.fromJson(json['snippet'] ?? {}),
     );
   }
+
+  @override
+  List<Object?> get props => [kind, etag, id, snippet];
 }

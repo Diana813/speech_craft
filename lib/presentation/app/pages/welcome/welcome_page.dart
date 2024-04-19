@@ -25,11 +25,13 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   late String _countryDropdownValue;
   late String _languageDropdownValue;
+  late String? _keywords;
 
   @override
   void initState() {
     _countryDropdownValue = widget.countries.first;
     _languageDropdownValue = widget.languages.first;
+    _keywords = null;
     super.initState();
   }
 
@@ -46,11 +48,16 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   void onSearchFrazeSubmitted(value) {
+    setState(() {
+      _keywords = value;
+    });
+
+    print('key: $_keywords');
     Navigator.pushNamed(context, '/learning_page',
         arguments: SearchKeyWords(
           country: _countryDropdownValue,
           language: _languageDropdownValue,
-          searchFraze: value,
+          searchFraze: _keywords,
         ));
   }
 

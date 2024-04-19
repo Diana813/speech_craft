@@ -19,7 +19,7 @@ class BaseApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         '/welcome_page': (BuildContext context) => WelcomePage(title: appName),
-        '/learning_page': (BuildContext context) => LearningPage(title: appName)
+        '/learning_page': (BuildContext context) => const LearningPage(title: appName)
       }
     );
   }

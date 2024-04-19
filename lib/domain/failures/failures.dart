@@ -9,6 +9,7 @@ sealed class Failure {
   String getMessage();
 }
 
+
 class ServerFailure extends Failure {
   const ServerFailure(super.message);
 
@@ -18,6 +19,7 @@ class ServerFailure extends Failure {
   }
 }
 
+
 class SavingDataFailure extends Failure {
   const SavingDataFailure(super.message);
 
@@ -26,6 +28,7 @@ class SavingDataFailure extends Failure {
     return "$savingDataFailureMessage ($message)";
   }
 }
+
 
 class GeneralFailure extends Failure {
   const GeneralFailure(super.message);
