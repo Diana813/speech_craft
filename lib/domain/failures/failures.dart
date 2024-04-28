@@ -1,40 +1,32 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:speech_craft/common/strings.dart';
 
 @immutable
-sealed class Failure {
-  final String message;
-  const Failure(this.message);
-
+sealed class Failure extends Equatable {
   String getMessage();
-}
 
+  @override
+  List<Object?> get props => [];
+}
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
-
   @override
   String getMessage() {
-    return "$apiFailureErrorMessage ($message)";
+    return apiFailureErrorMessage;
   }
 }
-
 
 class SavingDataFailure extends Failure {
-  const SavingDataFailure(super.message);
-
   @override
   String getMessage() {
-    return "$savingDataFailureMessage ($message)";
+    return savingDataFailureMessage;
   }
 }
 
-
 class GeneralFailure extends Failure {
-  const GeneralFailure(super.message);
-
   @override
   String getMessage() {
-    return "$generalErrorMessage ($message)";
+    return generalErrorMessage;
   }
 }

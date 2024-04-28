@@ -1,15 +1,16 @@
+import 'package:equatable/equatable.dart';
 import 'package:speech_craft/data/models/searchResult/thumbnails.dart';
 
-class SearchResultSnippet {
-  DateTime? publishedAt;
-  String? channelId;
-  String title;
-  String description;
-  Thumbnails thumbnails;
-  String? channelTitle;
-  String? liveBroadcastContent;
+class SearchResultSnippet extends Equatable {
+  final DateTime? publishedAt;
+  final String? channelId;
+  final String title;
+  final String description;
+  final Thumbnails thumbnails;
+  final String? channelTitle;
+  final String? liveBroadcastContent;
 
-  SearchResultSnippet({
+  const SearchResultSnippet({
     this.publishedAt,
     this.channelId,
     required this.title,
@@ -30,4 +31,15 @@ class SearchResultSnippet {
       liveBroadcastContent: json['liveBroadcastContent'] ?? '',
     );
   }
+
+  @override
+  List<Object?> get props => [
+        publishedAt,
+        channelId,
+        title,
+        description,
+        thumbnails,
+        channelTitle,
+        liveBroadcastContent
+      ];
 }

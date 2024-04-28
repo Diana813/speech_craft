@@ -1,41 +1,39 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:http/http.dart' as http;
 import 'package:speech_craft/common/strings.dart';
+import 'package:speech_craft/data/data_sources/search_request_builder.dart';
 import 'package:speech_craft/data/exceptions/exceptions.dart';
 import 'package:speech_craft/data/models/searchResult/search_result.dart';
-import 'package:http/http.dart' as http;
-
-import '../../common/keys.dart';
 
 abstract class SearchResultsRemoteDataSource {
-  Future<List<SearchResult>> getListOfVideos({required String keywords});
+  Future<List<SearchResult>> getListOfVideos({String? keywords, String? regionCode});
 }
 
 class SearchResultsRemoteDataSourceImpl
     implements SearchResultsRemoteDataSource {
-  SearchResultsRemoteDataSourceImpl._instantiate();
+  final http.Client client;
 
-  static final SearchResultsRemoteDataSourceImpl youTubeApiServiceInstance =
-      SearchResultsRemoteDataSourceImpl._instantiate();
+  SearchResultsRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<SearchResult>> getListOfVideos({String? keywords}) async {
-    String queryParams = keywords ?? '';
+  Future<List<SearchResult>> getListOfVideos(
+      {String? keywords, String? regionCode}) async {
+    SearchRequestBuilder requestBuilder = SearchRequestBuilder();
 
-    Map<String, String> parameters = {
-      'q': queryParams,
-      'key': GOOGLE_API_KEY,
-      'maxResults': '25',
-      'type': 'video',
-      'part': 'snippet'
-    };
+    Map<String, String> parameters = requestBuilder
+        .setQueryParams(keywords)
+        .setRegionCode(regionCode)
+        .build();
 
     Uri uri = Uri.https(googleBaseUrl, youtubeEndpoint, parameters);
-    final response = await http.get(uri);
+    final response = await client.get(uri);
     final responseBody = json.decode(response.body);
 
     if (response.statusCode != 200) {
-      throw ServerException(responseBody['error']['message']);
+      log('ERROR: ${responseBody['error']['message']}');
+      throw ServerException();
     } else {
       List<dynamic> items = responseBody['items'];
 

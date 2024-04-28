@@ -8,7 +8,7 @@ class SearchResult extends Equatable {
   final SearchResultId id;
   final SearchResultSnippet snippet;
 
-  SearchResult({
+  const SearchResult({
     required this.kind,
     required this.etag,
     required this.id,

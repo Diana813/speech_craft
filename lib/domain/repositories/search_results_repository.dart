@@ -5,5 +5,5 @@ import '../failures/failures.dart';
 
 abstract class SearchResultsRepository {
   Future<Either<List<SearchResultEntity>, Failure>>
-      getSearchResultsFromDatasource({required String keywords});
+      getSearchResultsFromDatasource({String? keywords, String? regionCode});
 }

@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:speech_craft/data/models/searchResult/thumbnail.dart';
 
-class Thumbnails {
-  Thumbnail defaultThumbnail;
-  Thumbnail mediumThumbnail;
-  Thumbnail highThumbnail;
+class Thumbnails extends Equatable {
+  final Thumbnail defaultThumbnail;
+  final Thumbnail mediumThumbnail;
+  final Thumbnail highThumbnail;
 
-  Thumbnails({
+  const Thumbnails({
     required this.defaultThumbnail,
     required this.mediumThumbnail,
     required this.highThumbnail,
@@ -18,4 +19,7 @@ class Thumbnails {
       highThumbnail: Thumbnail.fromJson(json['high'] ?? {}),
     );
   }
+
+  @override
+  List<Object?> get props => [defaultThumbnail, mediumThumbnail, highThumbnail];
 }

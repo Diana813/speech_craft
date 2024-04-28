@@ -1,9 +1,11 @@
-class Thumbnail {
-  String url;
-  int width;
-  int height;
+import 'package:equatable/equatable.dart';
 
-  Thumbnail({
+class Thumbnail extends Equatable {
+  final String url;
+  final int width;
+  final int height;
+
+  const Thumbnail({
     required this.url,
     required this.width,
     required this.height,
@@ -16,4 +18,7 @@ class Thumbnail {
       height: json['height'] ?? 0,
     );
   }
+
+  @override
+  List<Object?> get props => [url, width, height];
 }

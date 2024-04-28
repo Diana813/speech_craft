@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:speech_craft/domain/entities/language_entity.dart';
+import 'package:speech_craft/domain/entities/region_code_entity.dart';
 import 'package:speech_craft/presentation/app/pages/welcome/widgets/filter_buttons.dart';
 import 'package:speech_craft/presentation/app/pages/welcome/widgets/search_field.dart';
 import 'package:speech_craft/presentation/app/pages/welcome/widgets/welcome_text.dart';
@@ -14,8 +16,8 @@ class WelcomeScreenLarge extends StatelessWidget {
       required this.onLanguageChanged,
       required this.onSearchFrazeSubmitted});
 
-  final List<String> countries;
-  final List<String> languages;
+  final List<RegionCodeEntity> countries;
+  final List<LanguageEntity> languages;
 
   final String countryDropdownValue;
   final String languageDropdownValue;
@@ -41,9 +43,9 @@ class WelcomeScreenLarge extends StatelessWidget {
                 Column(
                   children: [
                     FilterButtons(
-                      countries: countries,
+                      countries: countries.map((it) => it.country).toList(),
                       countryDropdownValue: countryDropdownValue,
-                      languages: languages,
+                      languages: languages.map((it) => it.name).toList(),
                       languageDropdownValue: languageDropdownValue,
                       onCountryChanged: onCountryChanged,
                       onLanguageChanged: onLanguageChanged,

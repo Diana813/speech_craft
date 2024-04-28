@@ -1,10 +1,12 @@
-class SearchResultId {
-  String kind;
-  String videoId;
-  String channelId;
-  String playlistId;
+import 'package:equatable/equatable.dart';
 
-  SearchResultId({
+class SearchResultId extends Equatable {
+  final String kind;
+  final String videoId;
+  final String channelId;
+  final String playlistId;
+
+  const SearchResultId({
     required this.kind,
     required this.videoId,
     required this.channelId,
@@ -19,4 +21,7 @@ class SearchResultId {
       playlistId: json['playlistId'] ?? '',
     );
   }
+
+  @override
+  List<Object?> get props => [kind, videoId, channelId, playlistId];
 }

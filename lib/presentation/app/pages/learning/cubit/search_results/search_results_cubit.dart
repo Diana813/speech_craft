@@ -8,16 +8,20 @@ import '../../../../../../domain/entities/search_result_entity.dart';
 part 'search_results_state.dart';
 
 class SearchResultsCubit extends Cubit<SearchResultsState> {
-  SearchResultsCubit() : super(SearchResultsInitial());
-  final SearchUseCases searchUseCases = SearchUseCases();
+  final SearchUseCases searchUseCases;
 
-  void onSearchParamsSubmitted({String? keywords}) async {
-    emit(SearchResultsLoading());
+  SearchResultsCubit({required this.searchUseCases})
+      : super(const SearchResultsInitial());
 
-    final videosOrFailures = await searchUseCases.getSearchResults(keywords: keywords);
+  void onSearchParamsSubmitted({String? keywords, String? regionCode}) async {
+    emit(const SearchResultsLoading());
+
+    final videosOrFailures = await searchUseCases.getSearchResults(
+        keywords: keywords, regionCode: regionCode);
     videosOrFailures.fold(
       (videos) => emit(SearchResultsLoaded(videos: videos)),
-      (failure) => emit(SearchResultsAtError(errorMessage: failure.getMessage())),
+      (failure) =>
+          emit(SearchResultsAtError(errorMessage: failure.getMessage())),
     );
   }
 }

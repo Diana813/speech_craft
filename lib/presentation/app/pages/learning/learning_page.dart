@@ -3,7 +3,7 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:speech_craft/presentation/app/pages/learning/learning_screen.dart';
 import 'package:speech_craft/presentation/app/pages/learning/widgets/search__screen/search_results_wrapper_provider.dart';
 
-import '../../../../data/models/search_key_words.dart';
+import '../../../../data/models/search_request/search_key_words.dart';
 
 class LearningPage extends StatefulWidget {
   const LearningPage({super.key, required this.title, this.searchKeyWords});
