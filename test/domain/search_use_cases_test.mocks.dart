@@ -11,6 +11,8 @@ import 'package:speech_craft/domain/entities/search_result_entity.dart' as _i5;
 import 'package:speech_craft/domain/failures/failures.dart' as _i6;
 import 'package:speech_craft/domain/repositories/search_results_repository.dart'
     as _i3;
+import 'package:speech_craft/domain/repositories/translation_repository.dart'
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -85,4 +87,51 @@ class MockSearchResultsRepository extends _i1.Mock
             )),
           ) as _i4
               .Future<_i2.Either<List<_i5.SearchResultEntity>, _i6.Failure>>);
+}
+
+/// A class which mocks [TranslationRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTranslationRepository extends _i1.Mock
+    implements _i7.TranslationRepository {
+  @override
+  _i4.Future<_i2.Either<String, _i6.Failure>> getTranslationFromDatasource({
+    required String? keywords,
+    required String? language,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getTranslationFromDatasource,
+          [],
+          {
+            #keywords: keywords,
+            #language: language,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<String, _i6.Failure>>.value(
+            _FakeEither_0<String, _i6.Failure>(
+          this,
+          Invocation.method(
+            #getTranslationFromDatasource,
+            [],
+            {
+              #keywords: keywords,
+              #language: language,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<String, _i6.Failure>>.value(
+                _FakeEither_0<String, _i6.Failure>(
+          this,
+          Invocation.method(
+            #getTranslationFromDatasource,
+            [],
+            {
+              #keywords: keywords,
+              #language: language,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<String, _i6.Failure>>);
 }

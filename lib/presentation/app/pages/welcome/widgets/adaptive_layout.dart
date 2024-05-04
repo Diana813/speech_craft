@@ -45,7 +45,7 @@ class SearchAdaptiveLayout extends StatelessWidget {
               ),
             ),
             Breakpoints.mediumAndUp: SlotLayout.from(
-              key: const Key('primary-body'),
+              key: const Key('secondary-body'),
               builder: (context) => WelcomeScreenLarge(
                 countries: countries,
                 languages: languages,

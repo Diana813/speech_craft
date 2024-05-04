@@ -4,18 +4,20 @@ import 'package:mockito/mockito.dart';
 import 'package:speech_craft/domain/entities/search_result_entity.dart';
 import 'package:speech_craft/domain/failures/failures.dart';
 import 'package:speech_craft/domain/repositories/search_results_repository.dart';
+import 'package:speech_craft/domain/repositories/translation_repository.dart';
 import 'package:speech_craft/domain/use_cases/search_use_cases.dart';
 import 'package:test/test.dart';
 
 import 'search_use_cases_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<SearchResultsRepository>()])
+@GenerateNiceMocks([MockSpec<SearchResultsRepository>(), MockSpec<TranslationRepository>()])
 void main() {
   group('Search Use Cases', () {
     final mockSearchResultsRepository = MockSearchResultsRepository();
+    final mockTranslationRepository = MockTranslationRepository();
 
     final searchUseCasesUnderTest =
-        SearchUseCases(searchResultsRepository: mockSearchResultsRepository);
+        SearchUseCases(searchResultsRepository: mockSearchResultsRepository, translationRepository: mockTranslationRepository);
 
 
     group('should return list of SearchResultsEntities', () {

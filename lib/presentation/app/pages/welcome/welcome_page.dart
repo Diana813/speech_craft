@@ -16,10 +16,10 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<RegionCodeEntity> countries = [
-      const RegionCodeEntity(country: country, code: '')
+      const RegionCodeEntity(country: country, code: null)
     ];
     final List<LanguageEntity> languages = [
-      const LanguageEntity(code: '', name: language)
+      const LanguageEntity(code: null, name: language)
     ];
 
     String countryDropdownValue = countries.first.country;

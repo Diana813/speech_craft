@@ -30,9 +30,10 @@ void main() {
       'SearchResults displays loading indicator when state is SearchResultsLoading',
       (WidgetTester tester) async {
     whenListen(mockCubit, Stream.fromIterable(const [SearchResultsLoading()]),
-        initialState: const SearchResultsLoading());
+        initialState: const SearchResultsInitial());
 
     await tester.pumpWidget(testWidget(mockCubit));
+    await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -42,40 +43,29 @@ void main() {
       (WidgetTester tester) async {
     whenListen(
         mockCubit, Stream.fromIterable(const [SearchResultsLoaded(videos: [])]),
-        initialState: const SearchResultsLoaded(videos: []));
+        initialState: const SearchResultsInitial());
 
     await tester.pumpWidget(testWidget(mockCubit));
+    await tester.pump();
 
     expect(find.byType(SearchResultsList), findsOneWidget);
   });
 
   testWidgets(
-      'SearchResults displays error message when state is SearchResultsAtError',
-      (WidgetTester tester) async {
-    whenListen(
+    'SearchResults displays error message when state is SearchResultsAtError',
+        (WidgetTester tester) async {
+      whenListen(
         mockCubit,
         Stream.fromIterable(
-            const [SearchResultsAtError(errorMessage: generalErrorMessage)]),
-        initialState:
-            const SearchResultsAtError(errorMessage: generalErrorMessage));
+          const [SearchResultsAtError(errorMessage: 'Error: $generalErrorMessage')],
+        ),
+        initialState: const SearchResultsInitial(),
+      );
 
-    await tester.pumpWidget(testWidget(mockCubit));
+      await tester.pumpWidget(testWidget(mockCubit));
+      await tester.pump();
 
-    expect(find.text(generalErrorMessage), findsOneWidget);
-  });
-
-  testWidgets(
-      'SearchResults displays empty results text when state is neither of the above',
-      (WidgetTester tester) async {
-    whenListen(
-        mockCubit,
-        Stream.fromIterable(
-            const [SearchResultsAtError(errorMessage: generalErrorMessage)]),
-        initialState:
-            const SearchResultsAtError(errorMessage: generalErrorMessage));
-
-    await tester.pumpWidget(testWidget(mockCubit));
-
-    expect(find.text('No results found'), findsOneWidget);
-  });
+      expect(find.textContaining('Error: $generalErrorMessage'), findsOneWidget);
+    },
+  );
 }

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class RegionCodeEntity extends Equatable {
   final String country;
-  final String code;
+  final String? code;
 
   const RegionCodeEntity({
     required this.country,

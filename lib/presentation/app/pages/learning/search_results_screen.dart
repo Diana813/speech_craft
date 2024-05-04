@@ -16,6 +16,7 @@ class SearchResults extends StatelessWidget {
     BlocProvider.of<SearchResultsCubit>(context).onSearchParamsSubmitted(
       keywords: args?.searchFraze,
       regionCode: args?.regionCode,
+      languageCode: args?.languageCode,
     );
 
     return BlocBuilder<SearchResultsCubit, SearchResultsState>(

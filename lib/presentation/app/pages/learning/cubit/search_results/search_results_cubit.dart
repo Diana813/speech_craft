@@ -13,11 +13,11 @@ class SearchResultsCubit extends Cubit<SearchResultsState> {
   SearchResultsCubit({required this.searchUseCases})
       : super(const SearchResultsInitial());
 
-  void onSearchParamsSubmitted({String? keywords, String? regionCode}) async {
+  void onSearchParamsSubmitted({String? keywords, String? regionCode, String? languageCode}) async {
     emit(const SearchResultsLoading());
 
     final videosOrFailures = await searchUseCases.getSearchResults(
-        keywords: keywords, regionCode: regionCode);
+        keywords: keywords, regionCode: regionCode, languageCode: languageCode);
     videosOrFailures.fold(
       (videos) => emit(SearchResultsLoaded(videos: videos)),
       (failure) =>

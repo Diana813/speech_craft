@@ -3,15 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
-import 'package:dartz/dartz.dart' as _i3;
+import 'package:dartz/dartz.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:speech_craft/domain/entities/search_result_entity.dart' as _i6;
-import 'package:speech_craft/domain/failures/failures.dart' as _i7;
+import 'package:speech_craft/domain/entities/search_result_entity.dart' as _i7;
+import 'package:speech_craft/domain/failures/failures.dart' as _i8;
 import 'package:speech_craft/domain/repositories/search_results_repository.dart'
     as _i2;
-import 'package:speech_craft/domain/use_cases/search_use_cases.dart' as _i4;
+import 'package:speech_craft/domain/repositories/translation_repository.dart'
+    as _i3;
+import 'package:speech_craft/domain/use_cases/search_use_cases.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -37,8 +39,19 @@ class _FakeSearchResultsRepository_0 extends _i1.SmartFake
         );
 }
 
-class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
-  _FakeEither_1(
+class _FakeTranslationRepository_1 extends _i1.SmartFake
+    implements _i3.TranslationRepository {
+  _FakeTranslationRepository_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeEither_2<L, R> extends _i1.SmartFake implements _i4.Either<L, R> {
+  _FakeEither_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -50,7 +63,7 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
 /// A class which mocks [SearchUseCases].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSearchUseCases extends _i1.Mock implements _i4.SearchUseCases {
+class MockSearchUseCases extends _i1.Mock implements _i5.SearchUseCases {
   @override
   _i2.SearchResultsRepository get searchResultsRepository =>
       (super.noSuchMethod(
@@ -66,10 +79,24 @@ class MockSearchUseCases extends _i1.Mock implements _i4.SearchUseCases {
       ) as _i2.SearchResultsRepository);
 
   @override
-  _i5.Future<
-      _i3.Either<List<_i6.SearchResultEntity>, _i7.Failure>> getSearchResults({
+  _i3.TranslationRepository get translationRepository => (super.noSuchMethod(
+        Invocation.getter(#translationRepository),
+        returnValue: _FakeTranslationRepository_1(
+          this,
+          Invocation.getter(#translationRepository),
+        ),
+        returnValueForMissingStub: _FakeTranslationRepository_1(
+          this,
+          Invocation.getter(#translationRepository),
+        ),
+      ) as _i3.TranslationRepository);
+
+  @override
+  _i6.Future<
+      _i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>> getSearchResults({
     String? keywords,
     String? regionCode,
+    String? languageCode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -78,11 +105,12 @@ class MockSearchUseCases extends _i1.Mock implements _i4.SearchUseCases {
           {
             #keywords: keywords,
             #regionCode: regionCode,
+            #languageCode: languageCode,
           },
         ),
-        returnValue: _i5.Future<
-                _i3.Either<List<_i6.SearchResultEntity>, _i7.Failure>>.value(
-            _FakeEither_1<List<_i6.SearchResultEntity>, _i7.Failure>(
+        returnValue: _i6.Future<
+                _i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>.value(
+            _FakeEither_2<List<_i7.SearchResultEntity>, _i8.Failure>(
           this,
           Invocation.method(
             #getSearchResults,
@@ -90,12 +118,13 @@ class MockSearchUseCases extends _i1.Mock implements _i4.SearchUseCases {
             {
               #keywords: keywords,
               #regionCode: regionCode,
+              #languageCode: languageCode,
             },
           ),
         )),
-        returnValueForMissingStub: _i5.Future<
-                _i3.Either<List<_i6.SearchResultEntity>, _i7.Failure>>.value(
-            _FakeEither_1<List<_i6.SearchResultEntity>, _i7.Failure>(
+        returnValueForMissingStub: _i6.Future<
+                _i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>.value(
+            _FakeEither_2<List<_i7.SearchResultEntity>, _i8.Failure>(
           this,
           Invocation.method(
             #getSearchResults,
@@ -103,8 +132,9 @@ class MockSearchUseCases extends _i1.Mock implements _i4.SearchUseCases {
             {
               #keywords: keywords,
               #regionCode: regionCode,
+              #languageCode: languageCode,
             },
           ),
         )),
-      ) as _i5.Future<_i3.Either<List<_i6.SearchResultEntity>, _i7.Failure>>);
+      ) as _i6.Future<_i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>);
 }
