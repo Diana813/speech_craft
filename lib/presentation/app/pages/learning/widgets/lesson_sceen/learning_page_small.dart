@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:speech_craft/presentation/app/pages/learning/widgets/lesson_sceen/video_provider.dart';
+
+import '../../learning_screen.dart';
 
 class LearningPageSmall extends StatelessWidget {
   final String videoId;
@@ -23,7 +24,7 @@ class LearningPageSmall extends StatelessWidget {
           },
         ),
       ),
-      body: LessonScreenWrapperProvider(videoId: videoId),
+      body: LearningScreen(videoId: videoId),
     );
   }
 }

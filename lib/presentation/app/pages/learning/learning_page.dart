@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:speech_craft/presentation/app/pages/learning/widgets/lesson_sceen/video_provider.dart';
+import 'package:speech_craft/presentation/app/pages/learning/widgets/lesson_sceen/learning_page_large_serach_results_wrapper_provider.dart';
 import 'package:speech_craft/presentation/app/pages/learning/widgets/search__screen/search_results_wrapper_provider.dart';
 
 import '../../../../data/models/search_request/search_key_words.dart';
@@ -47,21 +47,8 @@ class _LearningPageState extends State<LearningPage> {
                   builder: (context, state) {
                     context.read<NavigationCubit>().lessonScreenDisplayed(
                         isLessonScreenDisplayed: isLessonScreenVisible);
-                    return Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: LessonScreenWrapperProvider(
-                              videoId: state.videoId ?? ''),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: SearchResultsWrapperProvider(
-                            searchKeyWords: widget.keyWords,
-                          ),
-                        )
-                      ],
-                    );
+                    return LearningPageLargeSearchResultsWrapperProvider(
+                        keywords: widget.keyWords);
                   },
                 ),
               ),

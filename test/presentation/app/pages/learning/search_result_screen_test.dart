@@ -21,7 +21,9 @@ void main() {
     return MaterialApp(
       home: BlocProvider<SearchResultsCubit>(
         create: (context) => cubit,
-        child: const SearchResults(searchKeyWords: null,),
+        child: const SearchResults(
+          searchKeyWords: null,
+        ),
       ),
     );
   }
@@ -42,7 +44,9 @@ void main() {
       'SearchResults displays SearchResultsList when state is SearchResultsLoaded',
       (WidgetTester tester) async {
     whenListen(
-        mockCubit, Stream.fromIterable(const [SearchResultsLoaded(videos: [])]),
+        mockCubit,
+        Stream.fromIterable(
+            const [SearchResultsLoaded(videos: [], videoIdInitial: '')]),
         initialState: const SearchResultsInitial());
 
     await tester.pumpWidget(testWidget(mockCubit));
@@ -53,11 +57,13 @@ void main() {
 
   testWidgets(
     'SearchResults displays error message when state is SearchResultsAtError',
-        (WidgetTester tester) async {
+    (WidgetTester tester) async {
       whenListen(
         mockCubit,
         Stream.fromIterable(
-          const [SearchResultsAtError(errorMessage: 'Error: $generalErrorMessage')],
+          const [
+            SearchResultsAtError(errorMessage: 'Error: $generalErrorMessage')
+          ],
         ),
         initialState: const SearchResultsInitial(),
       );
@@ -65,7 +71,26 @@ void main() {
       await tester.pumpWidget(testWidget(mockCubit));
       await tester.pump();
 
-      expect(find.textContaining('Error: $generalErrorMessage'), findsOneWidget);
+      expect(
+          find.textContaining('Error: $generalErrorMessage'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'SearchResults displays SearchResultsList when state is VideoIdChanged',
+        (WidgetTester tester) async {
+      whenListen(
+        mockCubit,
+        Stream.fromIterable(
+          const [VideoIdChanged(videoId: '1', videos: [])],
+        ),
+        initialState: const SearchResultsInitial(),
+      );
+
+      await tester.pumpWidget(testWidget(mockCubit));
+      await tester.pump();
+
+      expect(find.byType(SearchResultsList), findsOneWidget);
     },
   );
 }

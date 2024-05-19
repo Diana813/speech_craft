@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'cubit/learning/video_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning/widgets/lesson_sceen/app_youtube_player.dart';
 
 class LearningScreen extends StatelessWidget {
   final String videoId;
@@ -10,8 +8,20 @@ class LearningScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VideoCubit, VideoState>(builder: (context, state) {
-      return Text(videoId);
-    });
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          flex: 2,
+          child: AppYouTubePlayer(videoId: videoId),
+        ),
+        Expanded(
+          flex: 3,
+          child: Container(),
+        ),
+      ],
+    );
   }
 }

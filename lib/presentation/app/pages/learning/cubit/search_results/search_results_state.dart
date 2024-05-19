@@ -20,11 +20,12 @@ final class SearchResultsLoading extends SearchResultsState {
 
 final class SearchResultsLoaded extends SearchResultsState {
   final List<SearchResultEntity> videos;
+  final String videoIdInitial;
 
-  const SearchResultsLoaded({required this.videos});
+  const SearchResultsLoaded({ required this.videoIdInitial, required this.videos});
 
   @override
-  List<Object?> get props => videos;
+  List<Object?> get props => [videos, videoIdInitial];
 }
 
 final class SearchResultsAtError extends SearchResultsState {
@@ -34,4 +35,15 @@ final class SearchResultsAtError extends SearchResultsState {
 
   @override
   List<Object?> get props => [errorMessage];
+}
+
+
+final class VideoIdChanged extends SearchResultsState {
+  final List<SearchResultEntity> videos;
+  final String videoId;
+
+  const VideoIdChanged({ required this.videos, required this.videoId});
+
+  @override
+  List<Object?> get props => [videos, videoId];
 }

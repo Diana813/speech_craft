@@ -22,9 +22,15 @@ class SearchResultsCubit extends Cubit<SearchResultsState> {
 
     final videosOrFailures = await searchUseCases.call(params: params);
     videosOrFailures.fold(
-      (videos) => emit(SearchResultsLoaded(videos: videos)),
+      (videos) => emit(SearchResultsLoaded(
+          videos: videos, videoIdInitial: videos.first.videoId)),
       (failure) =>
           emit(SearchResultsAtError(errorMessage: failure.getMessage())),
     );
+  }
+
+  void onSelectedItemChanged(
+      {required String videoId, required List<SearchResultEntity> videos}) {
+    emit(VideoIdChanged(videoId: videoId, videos: videos));
   }
 }

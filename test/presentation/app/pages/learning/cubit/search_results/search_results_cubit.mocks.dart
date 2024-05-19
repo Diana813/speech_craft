@@ -137,4 +137,35 @@ class MockSearchUseCases extends _i1.Mock implements _i5.SearchUseCases {
           ),
         )),
       ) as _i6.Future<_i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>);
+
+  @override
+  _i6.Future<_i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>> call(
+          {required _i5.SearchParams? params}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+          {#params: params},
+        ),
+        returnValue: _i6.Future<
+                _i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>.value(
+            _FakeEither_2<List<_i7.SearchResultEntity>, _i8.Failure>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {#params: params},
+          ),
+        )),
+        returnValueForMissingStub: _i6.Future<
+                _i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>.value(
+            _FakeEither_2<List<_i7.SearchResultEntity>, _i8.Failure>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {#params: params},
+          ),
+        )),
+      ) as _i6.Future<_i4.Either<List<_i7.SearchResultEntity>, _i8.Failure>>);
 }

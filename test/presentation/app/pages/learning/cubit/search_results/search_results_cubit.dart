@@ -17,54 +17,107 @@ void main() {
     final mockSearchUseCases = MockSearchUseCases();
     const dummySearchResults = [
       SearchResultEntity(
-          title: 'title',
-          description: 'desc',
-          thumbnailUrl: 'url',
-          videoId: '1')
+        title: 'title',
+        description: 'desc',
+        thumbnailUrl: 'url',
+        videoId: '1',
+      ),
     ];
 
-    group('should emit', () {
-      blocTest<SearchResultsCubit, SearchResultsState>(
-          'nothing when no method was called',
-          build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
-          expect: () => const <SearchResultsState>[]);
+    blocTest<SearchResultsCubit, SearchResultsState>(
+      'nothing when no method was called',
+      build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
+      expect: () => const <SearchResultsState>[],
+    );
 
-      blocTest<SearchResultsCubit, SearchResultsState>(
-          '[SearchResultsLoading, SearchResultsLoaded] when onSearchParamsSubmitted() was called',
-          setUp: () => when(mockSearchUseCases.getSearchResults()).thenAnswer(
-              (realInvocation) => Future.value(
-                  const Left<List<SearchResultEntity>, Failure>(
-                      dummySearchResults))),
-          build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
-          act: (cubit) => cubit.onSearchParamsSubmitted(),
-          expect: () => const <SearchResultsState>[
-                SearchResultsLoading(),
-                SearchResultsLoaded(videos: dummySearchResults)
-              ]);
+    blocTest<SearchResultsCubit, SearchResultsState>(
+      '[SearchResultsLoading, SearchResultsLoaded] when onSearchParamsSubmitted() was called',
+      setUp: () {
+        final params = SearchParams(
+          keywords: 'test',
+          regionCode: 'US',
+          languageCode: 'en',
+        );
+        when(mockSearchUseCases.call(params: params)).thenAnswer(
+              (_) async => Left(dummySearchResults),
+        );
+      },
+      build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
+      act: (cubit) => cubit.onSearchParamsSubmitted(
+        keywords: 'test',
+        regionCode: 'US',
+        languageCode: 'en',
+      ),
+      expect: () => [
+        const SearchResultsLoading(),
+        SearchResultsLoaded(
+          videos: dummySearchResults,
+          videoIdInitial: dummySearchResults.first.videoId,
+        ),
+      ],
+    );
 
-      blocTest<SearchResultsCubit, SearchResultsState>(
-          '[SearchResultsLoading, SearchResultsAtError] when onSearchParamsSubmitted() was called and ServerError occurred',
-          setUp: () => when(mockSearchUseCases.getSearchResults()).thenAnswer(
-              (realInvocation) => Future.value(
-                  Right<List<SearchResultEntity>, Failure>(ServerFailure()))),
-          build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
-          act: (cubit) => cubit.onSearchParamsSubmitted(),
-          expect: () => const <SearchResultsState>[
-                SearchResultsLoading(),
-                SearchResultsAtError(errorMessage: apiFailureErrorMessage),
-              ]);
+    blocTest<SearchResultsCubit, SearchResultsState>(
+      '[SearchResultsLoading, SearchResultsAtError] when onSearchParamsSubmitted() was called and ServerError occurred',
+      setUp: () {
+        final params = SearchParams(
+          keywords: 'test',
+          regionCode: 'US',
+          languageCode: 'en',
+        );
+        when(mockSearchUseCases.call(params: params)).thenAnswer(
+              (_) async => Right(ServerFailure()),
+        );
+      },
+      build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
+      act: (cubit) => cubit.onSearchParamsSubmitted(
+        keywords: 'test',
+        regionCode: 'US',
+        languageCode: 'en',
+      ),
+      expect: () => [
+        const SearchResultsLoading(),
+        const SearchResultsAtError(errorMessage: apiFailureErrorMessage),
+      ],
+    );
 
-      blocTest<SearchResultsCubit, SearchResultsState>(
-          '[SearchResultsLoading, SearchResultsAtError] when onSearchParamsSubmitted() was called and GeneralError occurred',
-          setUp: () => when(mockSearchUseCases.getSearchResults()).thenAnswer(
-                  (realInvocation) => Future.value(
-                  Right<List<SearchResultEntity>, Failure>(GeneralFailure()))),
-          build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
-          act: (cubit) => cubit.onSearchParamsSubmitted(),
-          expect: () => const <SearchResultsState>[
-            SearchResultsLoading(),
-            SearchResultsAtError(errorMessage: generalErrorMessage),
-          ]);
-    });
+    blocTest<SearchResultsCubit, SearchResultsState>(
+      '[SearchResultsLoading, SearchResultsAtError] when onSearchParamsSubmitted() was called and GeneralError occurred',
+      setUp: () {
+        final params = SearchParams(
+          keywords: 'test',
+          regionCode: 'US',
+          languageCode: 'en',
+        );
+        when(mockSearchUseCases.call(params: params)).thenAnswer(
+              (_) async => Right(GeneralFailure()),
+        );
+      },
+      build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
+      act: (cubit) => cubit.onSearchParamsSubmitted(
+        keywords: 'test',
+        regionCode: 'US',
+        languageCode: 'en',
+      ),
+      expect: () => [
+        const SearchResultsLoading(),
+        const SearchResultsAtError(errorMessage: generalErrorMessage),
+      ],
+    );
+
+    blocTest<SearchResultsCubit, SearchResultsState>(
+      '[VideoIdChanged] when onSelectedItemChanged() was called',
+      build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
+      act: (cubit) => cubit.onSelectedItemChanged(
+        videoId: '2',
+        videos: dummySearchResults,
+      ),
+      expect: () => [
+        const VideoIdChanged(
+          videoId: '2',
+          videos: dummySearchResults,
+        ),
+      ],
+    );
   });
 }
