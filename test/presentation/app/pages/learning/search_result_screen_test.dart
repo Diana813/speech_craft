@@ -21,7 +21,7 @@ void main() {
     return MaterialApp(
       home: BlocProvider<SearchResultsCubit>(
         create: (context) => cubit,
-        child: const SearchResults(),
+        child: const SearchResults(searchKeyWords: null,),
       ),
     );
   }

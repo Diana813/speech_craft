@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:speech_craft/data/data_sources/translation_remote_data_source.dart';
+import 'package:speech_craft/data/data_sources/translation_data/translation_remote_data_source.dart';
 import 'package:speech_craft/data/exceptions/exceptions.dart';
 import 'package:speech_craft/data/repositories/translation_repository_implementation.dart';
 import 'package:speech_craft/domain/failures/failures.dart';

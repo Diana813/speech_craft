@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:speech_craft/data/data_sources/search_results_remote_data_source.dart';
+import 'package:speech_craft/data/data_sources/search_results_data/search_results_remote_data_source.dart';
 import 'package:speech_craft/data/exceptions/exceptions.dart';
 import 'package:speech_craft/data/repositories/search_result_repository_implementation.dart';
 import 'package:speech_craft/domain/entities/search_result_entity.dart';

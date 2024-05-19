@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:speech_craft/common/strings.dart';
-import 'package:speech_craft/data/data_sources/search_request_builder.dart';
+import 'package:speech_craft/data/data_sources/search_results_data/search_request_builder.dart';
 import 'package:speech_craft/data/exceptions/exceptions.dart';
 import 'package:speech_craft/data/models/searchResult/search_result.dart';
 

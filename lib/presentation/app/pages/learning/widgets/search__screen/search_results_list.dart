@@ -19,7 +19,6 @@ class SearchResultsList extends StatelessWidget {
       itemBuilder: (context, index) {
         return SearchResultItemWidget(
           result: videos[index],
-          onTap: () {},
         );
       },
     );

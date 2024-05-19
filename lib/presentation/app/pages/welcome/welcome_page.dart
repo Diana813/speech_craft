@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/data/models/search_request/search_key_words.dart';
 import 'package:speech_craft/domain/entities/language_entity.dart';
+import 'package:speech_craft/presentation/app/pages/learning/learning_page.dart';
 import 'package:speech_craft/presentation/app/pages/welcome/widgets/adaptive_layout.dart';
 
 import '../../../../common/strings.dart';
 import '../../../../domain/entities/region_code_entity.dart';
+import '../learning/cubit/navigation/navigation_cubit.dart';
 import 'cubit/query_params/query_params_cubit.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -49,38 +51,44 @@ class WelcomePage extends StatelessWidget {
             languageEntity = state.language;
           }
           return SearchAdaptiveLayout(
-            countries: countries,
-            languages: languages,
-            countryDropdownValue: countryDropdownValue,
-            languageDropdownValue: languageDropdownValue,
-            onCountryChanged: (value) =>
-                BlocProvider.of<QueryParamsCubit>(context).onCountrySubmitted(
-              country: RegionCodeEntity(
-                  country: value,
-                  code: countries
-                      .firstWhere((element) => element.country == value)
-                      .code),
-            ),
-            onLanguageChanged: (value) =>
-                BlocProvider.of<QueryParamsCubit>(context).onLanguageSubmitted(
-              language: LanguageEntity(
-                  name: value,
-                  code: languages
-                      .firstWhere((element) => element.name == value)
-                      .code),
-            ),
-            onSearchFrazeSubmitted: (value) => {
-              Navigator.pushNamed(
-                context,
-                '/learning_page',
-                arguments: SearchKeyWords(
-                  regionCode: countryEntity?.code,
-                  languageCode: languageEntity?.code,
-                  searchFraze: value,
-                ),
-              )
-            },
-          );
+              countries: countries,
+              languages: languages,
+              countryDropdownValue: countryDropdownValue,
+              languageDropdownValue: languageDropdownValue,
+              onCountryChanged: (value) =>
+                  BlocProvider.of<QueryParamsCubit>(context).onCountrySubmitted(
+                    country: RegionCodeEntity(
+                        country: value,
+                        code: countries
+                            .firstWhere((element) => element.country == value)
+                            .code),
+                  ),
+              onLanguageChanged: (value) =>
+                  BlocProvider.of<QueryParamsCubit>(context)
+                      .onLanguageSubmitted(
+                    language: LanguageEntity(
+                        name: value,
+                        code: languages
+                            .firstWhere((element) => element.name == value)
+                            .code),
+                  ),
+              onSearchFrazeSubmitted: (value) => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider<NavigationCubit>(
+                          create: (context) => NavigationCubit(),
+                          child: LearningPage(
+                            title: title,
+                            keyWords: SearchKeyWords(
+                                languageCode: languageEntity?.code,
+                                regionCode: countryEntity?.code,
+                                searchFraze: value),
+                          ),
+                        ),
+                      ),
+                    ),
+                  });
         },
       ),
     );

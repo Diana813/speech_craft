@@ -14,17 +14,17 @@ class QueryParamsCubit extends Cubit<QueryParamsState> {
   QueryParamsCubit({required this.queryParamsUseCases})
       : super(const QueryParamsInitial());
 
-  void onQueryParamsRequested() async {
+  void onQueryParamsRequested() {
     final languages = queryParamsUseCases.getLanguages();
     final regionCodes = queryParamsUseCases.getRegionCodes();
     emit(QueryParamsLoaded(languages: languages, regionCodes: regionCodes));
   }
 
-  void onCountrySubmitted({required RegionCodeEntity country}) async {
+  void onCountrySubmitted({required RegionCodeEntity country}) {
     emit(CountrySubmitted(regionCode: country));
   }
 
-  void onLanguageSubmitted({required LanguageEntity language}) async {
+  void onLanguageSubmitted({required LanguageEntity language}) {
     emit(LanguageSubmitted(language: language));
   }
 }

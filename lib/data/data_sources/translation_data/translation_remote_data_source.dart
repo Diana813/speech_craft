@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:speech_craft/data/data_sources/translation_request_builder.dart';
+import 'package:speech_craft/data/data_sources/translation_data/translation_request_builder.dart';
 
-import '../exceptions/exceptions.dart';
+import '../../exceptions/exceptions.dart';
 
 abstract class TranslationRemoteDataSource {
   Future<String> getTranslation(

@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-import '../../common/keys.dart';
+import '../../../common/keys.dart';
 
 class TranslationRequestBuilder {
   late String keywords;

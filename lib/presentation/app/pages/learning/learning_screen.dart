@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cubit/learning/video_cubit.dart';
 
 class LearningScreen extends StatelessWidget {
-  const LearningScreen({super.key});
+  final String videoId;
+
+  const LearningScreen({super.key, required this.videoId});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.teal,
-      child: const Text('Lekcja'),
-    );
+    return BlocBuilder<VideoCubit, VideoState>(builder: (context, state) {
+      return Text(videoId);
+    });
   }
 }

@@ -9,7 +9,9 @@ sealed class SearchResultsState extends Equatable {
 }
 
 final class SearchResultsInitial extends SearchResultsState {
-  const SearchResultsInitial();
+  final SearchParams? queryParams;
+
+  const SearchResultsInitial({this.queryParams});
 }
 
 final class SearchResultsLoading extends SearchResultsState {

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:speech_craft/assets/countries.dart';
 import 'package:speech_craft/assets/languages.dart';
 
-import '../models/search_request/country.dart';
-import '../models/search_request/language.dart';
+import '../../models/search_request/country.dart';
+import '../../models/search_request/language.dart';
 
 abstract class QueryParamsRemoteDataSource {
   List<Language> getLanguages();

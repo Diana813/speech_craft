@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:speech_craft/data/data_sources/translation_remote_data_source.dart';
-import 'package:speech_craft/data/data_sources/translation_request_builder.dart';
+import 'package:speech_craft/data/data_sources/translation_data/translation_remote_data_source.dart';
+import 'package:speech_craft/data/data_sources/translation_data/translation_request_builder.dart';
 import 'package:speech_craft/data/exceptions/exceptions.dart';
 
 import 'translation_remote_data_source_test.mocks.dart';
