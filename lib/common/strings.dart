@@ -12,3 +12,8 @@ const language = 'Język';
 
 const String googleBaseUrl = 'www.googleapis.com';
 const String youtubeEndpoint = '/youtube/v3/search';
+
+const String waitForVideoMessage = 'Chwileczkę, pobieram video i dzielę na fragmenty do powtórzenia';
+const String startTraning = 'Rozpocznij trening';
+const String repeat = 'Powtórz';
+const String submit = 'Zatwierdź';

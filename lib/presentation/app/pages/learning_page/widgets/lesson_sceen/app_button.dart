@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+
+import '../../../../../common/theme.dart';
+
+class AppButton extends StatelessWidget {
+  final Widget child;
+  final VoidCallback onPressed;
+
+  const AppButton({super.key, required this.child, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              )),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return Theme.of(context).primaryColorDark;
+                }
+                return AppTheme.lightTale;
+              }),
+          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+                  (Set<MaterialState> states) {
+                return Theme.of(context).textTheme.bodyMedium!;
+              }),
+        ),
+        onPressed: onPressed,
+        child: child,
+      ),
+    );
+  }
+}

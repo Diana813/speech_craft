@@ -6,8 +6,9 @@ import 'package:speech_craft/data/repositories/search_result_repository_implemen
 import 'package:speech_craft/domain/repositories/translation_repository.dart';
 import 'package:speech_craft/domain/use_cases/query_params_use_cases.dart';
 import 'package:speech_craft/domain/use_cases/search_use_cases.dart';
-import 'package:speech_craft/presentation/app/pages/learning/cubit/search_results/search_results_cubit.dart';
-import 'package:speech_craft/presentation/app/pages/welcome/cubit/query_params/query_params_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/learning_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/search_results/search_results_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/welcome_page/cubit/query_params/query_params_cubit.dart';
 
 import 'data/data_sources/translation_data/translation_remote_data_source.dart';
 import 'data/repositories/query_params_repository_implementation.dart';
@@ -66,4 +67,6 @@ Future<void> init() async {
   // presentation layer
   serviceLocator.registerFactory(
       () => SearchResultsCubit(searchUseCases: serviceLocator()));
+
+  serviceLocator.registerFactory(() => LearningCubit());
 }

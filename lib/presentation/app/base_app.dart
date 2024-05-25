@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speech_craft/presentation/app/pages/welcome/widgets/query_params_wrapper_provider.dart';
+import 'package:speech_craft/presentation/app/pages/welcome_page/widgets/query_params_wrapper_provider.dart';
 import 'package:speech_craft/presentation/common/theme.dart';
 
 import '../../common/strings.dart';

@@ -20,6 +20,7 @@ dependencies:
   http: ^1.1.2
   get_it: ^7.6.7
   video_player: ^2.8.2
+  jumping_dot: ^0.0.6
 
 dev_dependencies:
   test: ^1.24.9
