@@ -33,7 +33,7 @@ void main() {
       test('when Client response was 200 and has valid data', () async {
         //given
         when(mockClient
-            .get(Uri.https(googleBaseUrl, youtubeEndpoint, parameters)))
+            .get(Uri.https(googleBaseUrl, youtubeDataEndpoint, parameters)))
             .thenAnswer((realInvocation) =>
             Future.value(http.Response(dummySearchResults, 200)));
 
@@ -60,7 +60,7 @@ void main() {
               () async {
             //given
             when(mockClient
-                .get(Uri.https(googleBaseUrl, youtubeEndpoint, parameters)))
+                .get(Uri.https(googleBaseUrl, youtubeDataEndpoint, parameters)))
                 .thenAnswer((realInvocation) =>
                 Future.value(http.Response(exampleErrorResponse, 403)));
 
@@ -77,7 +77,7 @@ void main() {
             final response = jsonEncode({"response": "invalid response"});
 
             when(mockClient
-                .get(Uri.https(googleBaseUrl, youtubeEndpoint, parameters)))
+                .get(Uri.https(googleBaseUrl, youtubeDataEndpoint, parameters)))
                 .thenAnswer((realInvocation) =>
                 Future.value(http.Response(response, 200)));
 

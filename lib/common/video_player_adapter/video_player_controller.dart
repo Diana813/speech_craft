@@ -1,4 +1,13 @@
-part of 'video_player_cubit.dart';
+abstract class VideoPlayerController {
+  void initialize();
+  void play();
+  void pause();
+  void dispose();
+  void seekTo(Duration position);
+  bool get isPlaying;
+
+  Stream<VideoPlayerState> get onStateChanged;
+}
 
 class VideoPlayerState {
   final bool isPlaying;

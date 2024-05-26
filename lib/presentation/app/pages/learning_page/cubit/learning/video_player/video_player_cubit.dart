@@ -1,58 +1,69 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'package:speech_craft/common/strings.dart';
-import 'package:video_player/video_player.dart';
+import 'dart:io';
 
-part 'video_player_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media_kit_video/media_kit_video.dart';
+import 'package:speech_craft/domain/use_cases/video_use_cases.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+import '../../../../../../../common/video_player_adapter/video_player_controller.dart';
+import '../../../../../../../common/video_player_adapter/video_player_controller_factory.dart';
+import '../../../widgets/lesson_sceen/video_player.dart';
 
 class VideoPlayerCubit extends Cubit<VideoPlayerState> {
-  final VideoPlayerController _videoPlayerController;
+  final String videoId;
+  final UploadVideoUseCase _uploadVideoUseCase;
+  late final VideoPlayerController _controller;
 
-  VideoPlayerCubit(this._videoPlayerController) : super(VideoPlayerInitial()) {
-    _initialize();
-  }
+  VideoPlayerCubit(this.videoId, this._uploadVideoUseCase)
+      : super(VideoPlayerState(
+    isPlaying: false,
+    position: Duration.zero,
+    duration: Duration.zero,
+    isBuffering: false,
+  )) {
+    _uploadVideoUseCase.call(params: VideoUrlParams(videoId: videoId));
 
-  VideoPlayerController get videoPlayerController => _videoPlayerController;
-
-  void _initialize() async {
-    _videoPlayerController.addListener(_videoPlayerListener);
-    await _videoPlayerController.initialize();
-    emit(VideoPlayerInitial());
-  }
-
-  void _videoPlayerListener() {
-    if (_videoPlayerController.value.hasError) {
-      emit(VideoPlayerAtError(message: apiFailureErrorMessage));
-    } else if (_videoPlayerController.value.isPlaying) {
-      emit(VideoPlaying(isPlayClicked: true));
-    } else if (_videoPlayerController.value.isBuffering) {
-      emit(VideoLoading());
-    } else if (_videoPlayerController.value.isCompleted) {
-      emit(VideoLoaded());
-    } else if (_videoPlayerController.value.position == _videoPlayerController.value.duration) {
-      emit(VideoFinished());
-    } else {
-      emit(VideoPaused(isPlayClicked: false));
-    }
+    _controller = VideoPlayerControllerFactory.create(videoId);
+    _controller.onStateChanged.listen((state) {
+      emit(state);
+    });
   }
 
   @override
   Future<void> close() {
-    _videoPlayerController.dispose();
+    _controller.dispose();
     return super.close();
   }
 
-  void play() {
-    _videoPlayerController.play();
+  void playIfNotPlaying() {
+    if (!state.isPlaying) {
+      _controller.play();
+    }
   }
 
-  void pause() {
-    _videoPlayerController.pause();
+  void pause(){
+    _controller.pause();
   }
 
   void seekTo(Duration position) {
-    _videoPlayerController.seekTo(position);
+    _controller.seekTo(position);
+  }
+
+  void initialize(String videoId) {
+    _controller.dispose();
+    _controller = VideoPlayerControllerFactory.create(videoId);
+    _controller.onStateChanged.listen((state) {
+      emit(state);
+    });
+    _controller.initialize();
+  }
+
+  Widget buildVideoPlayerWidget() {
+    if (Platform.isWindows) {
+      return WindowsVideoPlayerWidget(controller: _controller as VideoController);
+    } else {
+      return DefaultVideoPlayerWidget(controller: _controller as YoutubePlayerController);
+    }
   }
 }
-

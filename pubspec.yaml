@@ -19,8 +19,14 @@ dependencies:
   dartz: ^0.10.1
   http: ^1.1.2
   get_it: ^7.6.7
-  video_player: ^2.8.2
+  media_kit: ^1.1.10
+  media_kit_video: ^1.2.4
+  media_kit_libs_video: ^1.0.4
+  youtube_player_iframe: ^4.0.4
   jumping_dot: ^0.0.6
+
+  media_kit_libs_android_video: any
+  media_kit_libs_windows_video: any
 
 dev_dependencies:
   test: ^1.24.9

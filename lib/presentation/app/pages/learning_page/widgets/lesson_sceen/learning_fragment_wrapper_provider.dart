@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:video_player/video_player.dart';
+import 'package:speech_craft/injection_container.dart';
 
 import '../../cubit/learning/video_player/video_player_cubit.dart';
 import '../../learning_fragment.dart';
@@ -12,10 +12,8 @@ class LearningFragmentWrapperProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String videoUrl = 'https://www.youtube.com/watch?v=$videoId';
-    final VideoPlayerController videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
     return BlocProvider(
-      create: (context) => VideoPlayerCubit(videoPlayerController),
+      create: (context) => VideoPlayerCubit(videoId, serviceLocator()),
       child: LearningFragment(
         videoId: videoId,
       ),

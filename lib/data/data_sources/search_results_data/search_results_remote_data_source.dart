@@ -27,7 +27,7 @@ class SearchResultsRemoteDataSourceImpl
         .setRegionCode(regionCode)
         .build();
 
-    Uri uri = Uri.https(googleBaseUrl, youtubeEndpoint, parameters);
+    Uri uri = Uri.https(googleBaseUrl, youtubeDataEndpoint, parameters);
     final response = await client.get(uri);
     final responseBody = json.decode(response.body);
 

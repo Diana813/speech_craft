@@ -1,11 +1,15 @@
 import 'package:get_it/get_it.dart';
-import 'package:speech_craft/data/data_sources/query_params_data/query_params_remote_data_source.dart';
+import 'package:speech_craft/data/data_sources/query_params_data/search_query_params_data_source.dart';
 import 'package:speech_craft/data/data_sources/search_results_data/search_results_remote_data_source.dart';
 import 'package:speech_craft/data/data_sources/translation_data/translation_request_builder.dart';
+import 'package:speech_craft/data/data_sources/video_data/video_remote_data_source.dart';
 import 'package:speech_craft/data/repositories/search_result_repository_implementation.dart';
+import 'package:speech_craft/data/repositories/video_repository_implementation.dart';
 import 'package:speech_craft/domain/repositories/translation_repository.dart';
+import 'package:speech_craft/domain/repositories/video_repository.dart';
 import 'package:speech_craft/domain/use_cases/query_params_use_cases.dart';
 import 'package:speech_craft/domain/use_cases/search_use_cases.dart';
+import 'package:speech_craft/domain/use_cases/video_use_cases.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/learning_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/search_results/search_results_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/welcome_page/cubit/query_params/query_params_cubit.dart';
@@ -22,8 +26,8 @@ final serviceLocator = GetIt.instance;
 Future<void> init() async {
   // Welcome page
   // data layer
-  serviceLocator.registerFactory<QueryParamsRemoteDataSource>(
-      () => QueryParamsRemoteDataSourceImpl());
+  serviceLocator.registerFactory<SearchQueryParamsDataSource>(
+          () => QueryParamsRemoteDataSourceImpl());
 
   serviceLocator.registerFactory<QueryParamsRepository>(() =>
       QueryParamsRepositoryImpl(
@@ -31,11 +35,11 @@ Future<void> init() async {
 
   // domain layer
   serviceLocator.registerFactory(
-      () => QueryParamsUseCases(queryParamsRepository: serviceLocator()));
+          () => QueryParamsUseCases(queryParamsRepository: serviceLocator()));
 
   // presentation layer
   serviceLocator.registerFactory(
-      () => QueryParamsCubit(queryParamsUseCases: serviceLocator()));
+          () => QueryParamsCubit(queryParamsUseCases: serviceLocator()));
 
   // Search results screen
   // external
@@ -43,16 +47,17 @@ Future<void> init() async {
 
   // data layer
   serviceLocator.registerFactory<SearchResultsRemoteDataSource>(
-      () => SearchResultsRemoteDataSourceImpl(client: serviceLocator()));
+          () => SearchResultsRemoteDataSourceImpl(client: serviceLocator()));
 
   serviceLocator.registerFactory<SearchResultsRepository>(() =>
       SearchResultsRepositoryImpl(
           searchResultsRemoteDataSourceImpl: serviceLocator()));
 
   serviceLocator.registerFactory<TranslationRemoteDataSource>(
-    () => TranslationRemoteDataSourceImpl(
-      builder: TranslationRequestBuilder(),
-    ),
+        () =>
+        TranslationRemoteDataSourceImpl(
+          builder: TranslationRequestBuilder(),
+        ),
   );
 
   serviceLocator.registerFactory<TranslationRepository>(() =>
@@ -60,13 +65,29 @@ Future<void> init() async {
           translationRemoteDataSourceImpl: serviceLocator()));
 
   // domain layer
-  serviceLocator.registerFactory(() => SearchUseCases(
-      searchResultsRepository: serviceLocator(),
-      translationRepository: serviceLocator()));
+  serviceLocator.registerFactory(() =>
+      SearchUseCases(
+          searchResultsRepository: serviceLocator(),
+          translationRepository: serviceLocator()));
 
   // presentation layer
   serviceLocator.registerFactory(
-      () => SearchResultsCubit(searchUseCases: serviceLocator()));
+          () => SearchResultsCubit(searchUseCases: serviceLocator()));
 
+
+
+  // learning fragment
+  // data layer
+  serviceLocator.registerFactory<VideoRemoteDataSource>(
+          () => VideoRemoteDataSourceImpl());
+
+  serviceLocator.registerFactory<VideoRepository>(
+          () => VideoRepositoryImpl(videoRemoteDataSourceImpl: serviceLocator()));
+
+  // domain layer
+  serviceLocator.registerFactory(
+          () => UploadVideoUseCase(videoRepository: serviceLocator()));
+
+  // presentation layer
   serviceLocator.registerFactory(() => LearningCubit());
 }

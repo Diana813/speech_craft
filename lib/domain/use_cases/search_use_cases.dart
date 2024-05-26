@@ -25,28 +25,6 @@ class SearchUseCases extends UseCase<List<SearchResultEntity>, SearchParams> {
       {required this.translationRepository,
       required this.searchResultsRepository});
 
-  Future<Either<List<SearchResultEntity>, Failure>> getSearchResults(
-      {String? keywords, String? regionCode, String? languageCode}) async {
-    if (languageCode != null && keywords != null) {
-      final translationOrFailure =
-          await translationRepository.getTranslationFromDatasource(
-              keywords: keywords, language: languageCode);
-
-      return translationOrFailure.fold(
-        (translation) {
-          return searchResultsRepository.getSearchResultsFromDatasource(
-              keywords: translation, regionCode: regionCode);
-        },
-        (failure) {
-          return Right(failure);
-        },
-      );
-    } else {
-      return searchResultsRepository.getSearchResultsFromDatasource(
-          keywords: keywords, regionCode: regionCode);
-    }
-  }
-
   @override
   Future<Either<List<SearchResultEntity>, Failure>> call(
       {required SearchParams params}) async {

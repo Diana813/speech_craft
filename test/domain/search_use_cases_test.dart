@@ -36,7 +36,7 @@ void main() {
             .thenAnswer((realInvocation) => Future.value(const Left(dummySearchResults)));
 
         //when
-        final result = await searchUseCasesUnderTest.getSearchResults();
+        final result = await searchUseCasesUnderTest.call(params: SearchParams());
 
         //then
         expect(result.isLeft(), true);
@@ -54,7 +54,7 @@ void main() {
                 .thenAnswer((realInvocation) => Future.value(Right(ServerFailure())));
 
             //when
-            final result = await searchUseCasesUnderTest.getSearchResults();
+            final result = await searchUseCasesUnderTest.call(params: SearchParams());
 
             //then
             expect(result.isRight(), true);

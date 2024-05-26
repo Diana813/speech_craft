@@ -6,13 +6,13 @@ import 'package:speech_craft/assets/languages.dart';
 import '../../models/search_request/country.dart';
 import '../../models/search_request/language.dart';
 
-abstract class QueryParamsRemoteDataSource {
+abstract class SearchQueryParamsDataSource {
   List<Language> getLanguages();
 
   List<Country> getCountries();
 }
 
-class QueryParamsRemoteDataSourceImpl implements QueryParamsRemoteDataSource {
+class QueryParamsRemoteDataSourceImpl implements SearchQueryParamsDataSource {
   @override
   List<Country> getCountries() {
     List<dynamic> result = jsonDecode(countries);

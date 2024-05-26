@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:speech_craft/common/strings.dart';
 
 import '../../../common/keys.dart';
 
@@ -19,8 +20,7 @@ class TranslationRequestBuilder {
   }
 
   Future<http.Response> post() async {
-    String url = 'https://translation.googleapis.com/language/translate/v2';
-    final response = await http.post(Uri.parse(url), body: {
+    final response = await http.post(Uri.parse(translationApiUrl), body: {
       'q': keywords,
       'target': languageCode,
       'format': 'text',
