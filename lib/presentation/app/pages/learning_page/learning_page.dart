@@ -21,7 +21,6 @@ class _LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
     bool isLessonScreenVisible = Breakpoints.mediumAndUp.isActive(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

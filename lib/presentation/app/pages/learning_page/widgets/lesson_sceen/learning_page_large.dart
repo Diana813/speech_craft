@@ -28,7 +28,7 @@ class LearningPageLarge extends StatelessWidget {
               } else if (state is VideoIdChanged) {
                 return LearningFragmentWrapperProvider(videoId: state.videoId);
               } else {
-                return LearningFragmentWrapperProvider(videoId: '');
+                return Container();
               }
             },
           ),

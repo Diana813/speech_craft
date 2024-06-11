@@ -7,7 +7,7 @@ import 'package:speech_craft/common/keys.dart';
 import 'package:speech_craft/common/strings.dart';
 import 'package:speech_craft/data/data_sources/search_results_data/search_results_remote_data_source.dart';
 import 'package:speech_craft/data/exceptions/exceptions.dart';
-import 'package:speech_craft/data/models/searchResult/search_result.dart';
+import 'package:speech_craft/data/models/search_response/search_result.dart';
 import 'package:test/test.dart';
 
 import 'search_results_remote_data_source_test.mocks.dart';

@@ -8,7 +8,7 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:speech_craft/data/data_sources/search_results_data/search_results_remote_data_source.dart'
     as _i2;
-import 'package:speech_craft/data/models/searchResult/search_result.dart'
+import 'package:speech_craft/data/models/search_response/search_result.dart'
     as _i4;
 
 // ignore_for_file: type=lint

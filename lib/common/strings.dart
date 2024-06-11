@@ -15,7 +15,7 @@ const String youtubeDataEndpoint = '/youtube/v3/search';
 const String translationApiUrl = 'https://translation.googleapis.com/language/translate/v2';
 const String youtubeUrl = 'https://www.youtube.com';
 
-const String waitForVideoMessage = 'Chwileczkę, pobieram video i dzielę na fragmenty do powtórzenia';
+const String waitForVideoMessage = 'Chwileczkę, dzielę video na fragmenty do powtórzenia';
 const String startTraning = 'Rozpocznij trening';
 const String repeat = 'Powtórz';
 const String submit = 'Zatwierdź';

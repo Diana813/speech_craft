@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/learning_cubit.dart';
 
 import '../../../../../../common/strings.dart';
 import '../../../../../common/theme.dart';
 import '../../cubit/learning/video_player/video_player_cubit.dart';
 
 class StartButton extends StatelessWidget {
-  const StartButton({super.key});
+  final bool isPlayClicked;
+
+  const StartButton({super.key, required this.isPlayClicked});
 
   @override
   Widget build(BuildContext context) {
-    bool isPlayClicked = false;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -33,7 +35,9 @@ class StartButton extends StatelessWidget {
             ),
             shadowColor:
                 MaterialStateProperty.all<Color>(AppTheme.grey.shade700),
-            elevation: isPlayClicked ? null : MaterialStateProperty.all(1.0),
+            elevation: isPlayClicked
+                ? null
+                : MaterialStateProperty.all(1.0),
             backgroundColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.pressed)) {
@@ -45,6 +49,7 @@ class StartButton extends StatelessWidget {
           ),
           onPressed: () {
             BlocProvider.of<VideoPlayerCubit>(context).playIfNotPlaying();
+            BlocProvider.of<LearningCubit>(context).onPlayClicked();
           },
           icon: Icon(
             Icons.play_arrow,

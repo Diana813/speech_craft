@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:speech_craft/data/models/searchResult/thumbnail.dart';
+import 'package:speech_craft/data/models/search_response/thumbnail.dart';
 
 class Thumbnails extends Equatable {
   final Thumbnail defaultThumbnail;

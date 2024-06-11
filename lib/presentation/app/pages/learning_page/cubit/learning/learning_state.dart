@@ -8,14 +8,19 @@ sealed class LearningState extends Equatable {
 
 final class LearningInitial extends LearningState {}
 
-final class PausesLoading extends LearningState {}
+final class VideoUploading extends LearningState {}
 
-final class PausesLoaded extends LearningState {}
+final class VideoUploaded extends LearningState {}
 
-final class PausesAtError extends LearningState {}
+final class VideoUploadingAtError extends LearningState {
+  final String errorMessage;
 
-final class VideoPlaying extends LearningState {}
+  VideoUploadingAtError({required this.errorMessage});
 
-final class VideoPaused extends LearningState {}
+  @override
+  List<Object?> get props => [errorMessage];
+}
+
+final class PlayButtonClicked extends LearningState {}
 
 final class SentenceRepeatedAndSubmitted extends LearningState {}

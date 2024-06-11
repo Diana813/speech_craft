@@ -1,69 +1,53 @@
-import 'dart:io';
+import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:media_kit_video/media_kit_video.dart';
-import 'package:speech_craft/domain/use_cases/video_use_cases.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 
-import '../../../../../../../common/video_player_adapter/video_player_controller.dart';
+import '../../../../../../../common/video_player_adapter/video_player.dart';
 import '../../../../../../../common/video_player_adapter/video_player_controller_factory.dart';
-import '../../../widgets/lesson_sceen/video_player.dart';
 
 class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   final String videoId;
-  final UploadVideoUseCase _uploadVideoUseCase;
-  late final VideoPlayerController _controller;
+  late final VideoPlayer _videoPlayer;
+  late final StreamSubscription _videoPlayerSubscription;
 
-  VideoPlayerCubit(this.videoId, this._uploadVideoUseCase)
+  VideoPlayerCubit(this.videoId)
       : super(VideoPlayerState(
-    isPlaying: false,
-    position: Duration.zero,
-    duration: Duration.zero,
-    isBuffering: false,
-  )) {
-    _uploadVideoUseCase.call(params: VideoUrlParams(videoId: videoId));
-
-    _controller = VideoPlayerControllerFactory.create(videoId);
-    _controller.onStateChanged.listen((state) {
-      emit(state);
-    });
+          isPlaying: false,
+          isBuffering: false,
+        )) {
+    initialize(videoId);
   }
 
   @override
   Future<void> close() {
-    _controller.dispose();
+    _videoPlayerSubscription.cancel();
+    _videoPlayer.dispose();
     return super.close();
   }
 
   void playIfNotPlaying() {
     if (!state.isPlaying) {
-      _controller.play();
+      _videoPlayer.play();
     }
   }
 
-  void pause(){
-    _controller.pause();
+  void pause() {
+    _videoPlayer.pause();
   }
 
   void seekTo(Duration position) {
-    _controller.seekTo(position);
+    _videoPlayer.seekTo(position);
   }
 
   void initialize(String videoId) {
-    _controller.dispose();
-    _controller = VideoPlayerControllerFactory.create(videoId);
-    _controller.onStateChanged.listen((state) {
+    _videoPlayer = VideoPlayerControllerFactory.create(videoId);
+    _videoPlayer.initialize();
+    _videoPlayerSubscription = _videoPlayer.onStateChanged.listen((state) {
       emit(state);
     });
-    _controller.initialize();
   }
 
-  Widget buildVideoPlayerWidget() {
-    if (Platform.isWindows) {
-      return WindowsVideoPlayerWidget(controller: _controller as VideoController);
-    } else {
-      return DefaultVideoPlayerWidget(controller: _controller as YoutubePlayerController);
-    }
-  }
+  Widget get videoPlayerWidget => _videoPlayer.videoPlayerWidget;
 }

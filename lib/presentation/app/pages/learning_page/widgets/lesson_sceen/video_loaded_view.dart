@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/learning_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/repeating_view.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/start_button.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/video_player.dart';
 
-import '../../../../../../common/video_player_adapter/video_player_controller.dart';
 import '../../cubit/learning/video_player/video_player_cubit.dart';
+import '../../cubit/learning/video_player/video_player_state.dart';
 
 class VideoLoadedView extends StatelessWidget {
   const VideoLoadedView({super.key});
@@ -19,28 +19,32 @@ class VideoLoadedView extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
-            builder: (context, state) {
-              final cubit = context.read<VideoPlayerCubit>();
-              return Container(
-                color: Colors.black87,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                ),
-                child: cubit.buildVideoPlayerWidget(),
-              );
-            },
+          child: Container(
+            color: Colors.black87,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
+              builder: (context, state) {
+                final cubit = context.read<VideoPlayerCubit>();
+                return cubit.videoPlayerWidget;
+              },
+            ),
           ),
         ),
         Expanded(
           flex: 3,
-          child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
+          child: BlocBuilder<LearningCubit, LearningState>(
             builder: (context, state) {
-              if (!state.isPlaying) {
-                return const RepeatingView();
-              } else {
-                return const StartButton();
-              }
+              return BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
+                builder: (context, videoState) {
+                  if (!videoState.isPlaying && state is PlayButtonClicked) {
+                    return const RepeatingView();
+                  } else {
+                    return StartButton(
+                      isPlayClicked: state is PlayButtonClicked,
+                    );
+                  }
+                },
+              );
             },
           ),
         ),

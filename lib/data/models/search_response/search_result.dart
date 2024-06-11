@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:speech_craft/data/models/searchResult/search_result_id.dart';
-import 'package:speech_craft/data/models/searchResult/search_result_snippet.dart';
+import 'package:speech_craft/data/models/search_response/search_result_id.dart';
+import 'package:speech_craft/data/models/search_response/search_result_snippet.dart';
 
 class SearchResult extends Equatable {
   final String kind;

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:speech_craft/data/models/searchResult/thumbnails.dart';
+import 'package:speech_craft/data/models/search_response/thumbnails.dart';
 
 class SearchResultSnippet extends Equatable {
   final DateTime? publishedAt;

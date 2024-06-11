@@ -4,8 +4,7 @@ import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/video_loading_view.dart';
 
 import '../../../../common/strings.dart';
-import '../../../../common/video_player_adapter/video_player_controller.dart';
-import 'cubit/learning/video_player/video_player_cubit.dart';
+import 'cubit/learning/learning_cubit.dart';
 
 class LearningFragment extends StatelessWidget {
   final String videoId;
@@ -14,12 +13,13 @@ class LearningFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
+    BlocProvider.of<LearningCubit>(context).onVideoUploading();
+
+    return BlocBuilder<LearningCubit, LearningState>(
       builder: (context, state) {
-        if (state.isBuffering) {
+        if (state is VideoUploading) {
           return const VideoLoadingView();
-        } else if (!state.isBuffering &&
-            state.position == const Duration(seconds: 0)) {
+        } else if (state is VideoUploaded) {
           return const VideoLoadedView();
         } else {
           return const Center(

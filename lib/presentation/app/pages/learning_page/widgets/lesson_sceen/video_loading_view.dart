@@ -29,7 +29,10 @@ class VideoLoadingView extends StatelessWidget {
         const Expanded(
           flex: 3,
           child: Center(
-            child: Text(waitForVideoMessage),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(waitForVideoMessage, textAlign: TextAlign.center,),
+            ),
           ),
         ),
       ],

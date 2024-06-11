@@ -1,6 +1,6 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../common/strings.dart';
@@ -15,22 +15,26 @@ class VideoRemoteDataSourceImpl extends VideoRemoteDataSource {
   Future<String> uploadVideoToCoreService({required String videoId}) async {
     String youtubeVideoUrl = '$youtubeUrl/watch?v=$videoId';
 
+    final host = kIsWeb
+        ? '127.0.0.1'
+        : Platform.isAndroid
+            ? '192.168.1.165'
+            : '127.0.0.1';
+
     Uri url = Uri(
       scheme: 'http',
-      host: Platform.isAndroid ? '10.0.2.2' : '127.0.0.1',
+      host: host,
       port: 5000,
       path: '/api/video',
       queryParameters: {'youtube_url': youtubeVideoUrl},
     );
 
-    final response = await http.post(url, headers: {'Accept': 'video/mp4'});
+    final response = await http.get(url, headers: {'Accept': 'video/mp4'});
 
-    final jsonResponse = json.decode(response.body);
-
-    if (response.statusCode != 200) {
-      log('ERROR: ${jsonResponse['error']['message']}');
+    if (response.statusCode == 200 || response.statusCode == 304) {
+      return response.statusCode.toString();
+    } else {
       throw ServerException();
     }
-    return response.body;
   }
 }

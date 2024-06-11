@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:speech_craft/data/models/searchResult/search_result.dart';
-import 'package:speech_craft/data/models/searchResult/search_result_id.dart';
-import 'package:speech_craft/data/models/searchResult/search_result_snippet.dart';
-import 'package:speech_craft/data/models/searchResult/thumbnail.dart';
-import 'package:speech_craft/data/models/searchResult/thumbnails.dart';
+import 'package:speech_craft/data/models/search_response/search_result.dart';
+import 'package:speech_craft/data/models/search_response/search_result_id.dart';
+import 'package:speech_craft/data/models/search_response/search_result_snippet.dart';
+import 'package:speech_craft/data/models/search_response/thumbnail.dart';
+import 'package:speech_craft/data/models/search_response/thumbnails.dart';
 import 'package:speech_craft/domain/entities/search_result_entity.dart';
 import 'package:speech_craft/domain/failures/failures.dart';
 

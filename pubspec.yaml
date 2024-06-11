@@ -21,11 +21,10 @@ dependencies:
   get_it: ^7.6.7
   media_kit: ^1.1.10
   media_kit_video: ^1.2.4
-  media_kit_libs_video: ^1.0.4
   youtube_player_iframe: ^4.0.4
   jumping_dot: ^0.0.6
+  permission_handler: ^11.3.1
 
-  media_kit_libs_android_video: any
   media_kit_libs_windows_video: any
 
 dev_dependencies:
