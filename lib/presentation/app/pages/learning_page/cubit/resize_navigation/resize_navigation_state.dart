@@ -1,16 +1,16 @@
-part of 'navigation_cubit.dart';
+part of 'resize_navigation_cubit.dart';
 
-final class NavigationState extends Equatable {
+final class ScreenResizedNavigationState extends Equatable {
   final bool? isLessonScreenDisplayed;
 
-  const NavigationState({this.isLessonScreenDisplayed});
+  const ScreenResizedNavigationState({this.isLessonScreenDisplayed});
 
   @override
   List<Object?> get props => [isLessonScreenDisplayed];
 }
 
 
-final class VideoIdChangedState extends NavigationState {
+final class VideoIdChangedState extends ScreenResizedNavigationState {
   final String? videoId;
 
   const VideoIdChangedState({required this.videoId});

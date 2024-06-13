@@ -7,9 +7,7 @@ import '../../../../common/strings.dart';
 import 'cubit/learning/learning_cubit.dart';
 
 class LearningFragment extends StatelessWidget {
-  final String videoId;
-
-  const LearningFragment({super.key, required this.videoId});
+  const LearningFragment({super.key});
 
   @override
   Widget build(BuildContext context) {

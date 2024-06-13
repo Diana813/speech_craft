@@ -21,6 +21,6 @@ final class VideoUploadingAtError extends LearningState {
   List<Object?> get props => [errorMessage];
 }
 
-final class PlayButtonClicked extends LearningState {}
+final class NoVideoIdProvided extends LearningState {}
 
 final class SentenceRepeatedAndSubmitted extends LearningState {}

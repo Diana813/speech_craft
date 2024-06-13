@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 
-import '../../../../../../../common/video_player_adapter/video_player.dart';
-import '../../../../../../../common/video_player_adapter/video_player_controller_factory.dart';
+import '../../../../../../../data/data_sources/video_data/video_player_adapter/video_player.dart';
+import '../../../../../../../data/data_sources/video_data/video_player_adapter/video_player_controller_factory.dart';
 
 class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   final String videoId;

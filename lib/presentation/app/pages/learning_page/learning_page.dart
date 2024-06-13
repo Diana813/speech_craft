@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/learning_page_large_wrapper_provider.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/widgets/search_fragment/search_results_wrapper_provider.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/search_results_fragment.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/learning_fragment/learning_page_large.dart';
 
 import '../../../../data/models/search_request/search_key_words.dart';
-import 'cubit/navigation/navigation_cubit.dart';
+import 'cubit/resize_navigation/resize_navigation_cubit.dart';
 
 class LearningPage extends StatefulWidget {
   const LearningPage({super.key, required this.title, required this.keyWords});
@@ -35,19 +35,20 @@ class _LearningPageState extends State<LearningPage> {
             config: <Breakpoint, SlotLayoutConfig>{
               Breakpoints.smallAndUp: SlotLayout.from(
                 key: const Key('primary-body'),
-                builder: (context) => SearchResultsWrapperProvider(
+                builder: (context) => SearchResults(
                   searchKeyWords: widget.keyWords,
                 ),
               ),
               Breakpoints.mediumAndUp: SlotLayout.from(
                 key: const Key('secondary-body'),
-                builder: (context) =>
-                    BlocBuilder<NavigationCubit, NavigationState>(
+                builder: (context) => BlocBuilder<ScreenResizedNavigationCubit,
+                    ScreenResizedNavigationState>(
                   builder: (context, state) {
-                    context.read<NavigationCubit>().lessonScreenDisplayed(
-                        isLessonScreenDisplayed: isLessonScreenVisible);
-                    return LearningPageLargeSearchResultsWrapperProvider(
-                        keywords: widget.keyWords);
+                    context
+                        .read<ScreenResizedNavigationCubit>()
+                        .lessonScreenDisplayed(
+                            isLessonScreenDisplayed: isLessonScreenVisible);
+                    return LearningPageLarge(keywords: widget.keyWords);
                   },
                 ),
               ),

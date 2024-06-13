@@ -19,3 +19,8 @@ const String waitForVideoMessage = 'Chwileczkę, dzielę video na fragmenty do p
 const String startTraning = 'Rozpocznij trening';
 const String repeat = 'Powtórz';
 const String submit = 'Zatwierdź';
+
+const start = 'Start';
+const train = 'Trenuj';
+const replay = 'Powtórka';
+

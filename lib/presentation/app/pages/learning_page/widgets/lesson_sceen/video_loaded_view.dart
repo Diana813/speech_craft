@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/learning_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/start_button_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/repeating_view.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/start_button.dart';
 
@@ -34,15 +35,17 @@ class VideoLoadedView extends StatelessWidget {
           flex: 3,
           child: BlocBuilder<LearningCubit, LearningState>(
             builder: (context, state) {
-              return BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
-                builder: (context, videoState) {
-                  if (!videoState.isPlaying && state is PlayButtonClicked) {
-                    return const RepeatingView();
-                  } else {
-                    return StartButton(
-                      isPlayClicked: state is PlayButtonClicked,
-                    );
-                  }
+              return BlocBuilder<StartButtonCubit, bool>(
+                builder: (context, trainingStarted) {
+                  return BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
+                    builder: (context, videoState) {
+                      if (!videoState.isPlaying && trainingStarted) {
+                        return const RepeatingView();
+                      } else {
+                        return const StartButton();
+                      }
+                    },
+                  );
                 },
               );
             },

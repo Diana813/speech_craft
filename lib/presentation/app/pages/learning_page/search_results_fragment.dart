@@ -31,8 +31,6 @@ class SearchResults extends StatelessWidget {
           return SearchResultsList(videos: state.videos);
         } else if (state is SearchResultsAtError) {
           return Center(child: Text('Error: ${state.errorMessage}'));
-        } else if (state is VideoIdChanged) {
-          return SearchResultsList(videos: state.videos);
         } else {
           return const Text(emptyResults);
         }

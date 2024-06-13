@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/search_results/search_results_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/learning_fragment.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/learning_page_large.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/learning_fragment/learning_page_large.dart';
 
 class MockSearchResultsCubit extends MockCubit<SearchResultsState> implements SearchResultsCubit {}
 
@@ -31,7 +31,7 @@ void main() {
         (WidgetTester tester) async {
       whenListen(
         mockCubit,
-        Stream.fromIterable(const [SearchResultsLoaded(videos: [], videoIdInitial: '123')]),
+        Stream.fromIterable(const [SearchResultsLoaded(videos: [])]),
         initialState: const SearchResultsInitial(),
       );
 
@@ -39,7 +39,7 @@ void main() {
       await tester.pump();
 
       expect(find.byType(LearningFragment), findsOneWidget);
-      expect(find.byWidgetPredicate((widget) => widget is LearningFragment && widget.videoId == '123'), findsOneWidget);
+      expect(find.byWidgetPredicate((widget) => widget is LearningFragment), findsOneWidget);
     },
   );
 
@@ -56,7 +56,7 @@ void main() {
       await tester.pump();
 
       expect(find.byType(LearningFragment), findsOneWidget);
-      expect(find.byWidgetPredicate((widget) => widget is LearningFragment && widget.videoId == '456'), findsOneWidget);
+      expect(find.byWidgetPredicate((widget) => widget is LearningFragment), findsOneWidget);
     },
   );
 
@@ -73,7 +73,7 @@ void main() {
       await tester.pump();
 
       expect(find.byType(LearningFragment), findsOneWidget);
-      expect(find.byWidgetPredicate((widget) => widget is LearningFragment && widget.videoId == ''), findsOneWidget);
+      expect(find.byWidgetPredicate((widget) => widget is LearningFragment), findsOneWidget);
     },
   );
 }

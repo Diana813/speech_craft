@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import '../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
+import '../../../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 import 'video_player.dart';
 
 class DefaultVideoPlayer implements VideoPlayer {
@@ -13,7 +13,7 @@ class DefaultVideoPlayer implements VideoPlayer {
       : _controller = YoutubePlayerController.fromVideoId(
           videoId: videoId,
           autoPlay: false,
-          params: const YoutubePlayerParams(showControls: false),
+          params: const YoutubePlayerParams(showControls: false, enableCaption: false),
         ) {
     _controller.stream.listen((YoutubePlayerValue value) {
       _updateState();
@@ -34,7 +34,6 @@ class DefaultVideoPlayer implements VideoPlayer {
   @override
   void play() {
     _controller.playVideo();
-    print("controller play video");
   }
 
   @override

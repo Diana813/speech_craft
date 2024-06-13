@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import '../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
-import '../strings.dart';
+import '../../../../common/strings.dart';
+import '../../../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 import 'video_player.dart';
 
 class WindowsVideoPlayer implements VideoPlayer {
@@ -21,6 +21,7 @@ class WindowsVideoPlayer implements VideoPlayer {
     _initializeController();
     String url = _getVideoUrl(videoId: videoId);
     _player.open(Media(url));
+    _player.pause();
 
     // _playingSubscription = _player.stream.playing.listen((bool playing) {
     //   print("Playing state changed. Playing: $playing");

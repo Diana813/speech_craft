@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/data/models/search_request/search_key_words.dart';
 import 'package:speech_craft/domain/entities/language_entity.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/providers/learning_page_wrapper_provider.dart';
 import 'package:speech_craft/presentation/app/pages/welcome_page/widgets/adaptive_layout.dart';
 
 import '../../../../common/strings.dart';
 import '../../../../domain/entities/region_code_entity.dart';
-import '../learning_page/cubit/navigation/navigation_cubit.dart';
-import '../learning_page/learning_page.dart';
+import '../learning_page/cubit/resize_navigation/resize_navigation_cubit.dart';
 import 'cubit/query_params/query_params_cubit.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -76,11 +76,12 @@ class WelcomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BlocProvider<NavigationCubit>(
-                          create: (context) => NavigationCubit(),
-                          child: LearningPage(
+                        builder: (context) =>
+                            BlocProvider<ScreenResizedNavigationCubit>(
+                          create: (context) => ScreenResizedNavigationCubit(),
+                          child: LearningPageWrapperProvider(
                             title: title,
-                            keyWords: SearchKeyWords(
+                            keywords: SearchKeyWords(
                                 languageCode: languageEntity?.code,
                                 regionCode: countryEntity?.code,
                                 searchFraze: value),

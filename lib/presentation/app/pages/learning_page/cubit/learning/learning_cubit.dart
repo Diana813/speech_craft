@@ -13,6 +13,7 @@ class LearningCubit extends Cubit<LearningState> {
   LearningCubit({required this.uploadVideoUseCase, required this.videoId})
       : super(LearningInitial());
 
+
   void onVideoUploading() async {
     emit(VideoUploading());
     final videoUploadedOrFailure =
@@ -23,9 +24,5 @@ class LearningCubit extends Cubit<LearningState> {
       (failure) =>
           emit(VideoUploadingAtError(errorMessage: failure.getMessage())),
     );
-  }
-
-  void onPlayClicked(){
-    emit(PlayButtonClicked());
   }
 }

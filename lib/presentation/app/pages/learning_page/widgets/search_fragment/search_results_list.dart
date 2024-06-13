@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/providers/learning_page_small%20wrapper_provider.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/search_fragment/search_result_item.dart';
 
 import '../../../../../../domain/entities/search_result_entity.dart';
 import '../../cubit/search_results/search_results_cubit.dart';
-import '../lesson_sceen/learning_page_small.dart';
 
 class SearchResultsList extends StatelessWidget {
   const SearchResultsList({
@@ -30,8 +30,8 @@ class SearchResultsList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      LearningPageSmall(videoId: videos[index].videoId),
+                  builder: (context) => LearningPageSmallWrapperProvider(
+                      videoId: videos[index].videoId),
                 ),
               );
             }

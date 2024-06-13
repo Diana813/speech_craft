@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
+import '../../../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 
 abstract class VideoPlayer {
   void initialize();

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/learning_fragment_wrapper_provider.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/bottom_controls/small_screen_bottom_controls.dart';
 
+import '../../../learning_fragment.dart';
 
 class LearningPageSmall extends StatelessWidget {
-  final String videoId;
-
-  const LearningPageSmall({super.key, required this.videoId});
+  const LearningPageSmall({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,8 @@ class LearningPageSmall extends StatelessWidget {
           },
         ),
       ),
-      body: LearningFragmentWrapperProvider(videoId: videoId),
+      body: const LearningFragment(),
+      bottomNavigationBar: const SmallScreenBottomControls(),
     );
   }
 }
