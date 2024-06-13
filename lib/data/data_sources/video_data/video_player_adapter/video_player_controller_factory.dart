@@ -6,7 +6,7 @@ import 'package:speech_craft/data/data_sources/video_data/video_player_adapter/w
 
 import 'default_video_player.dart';
 
-class VideoPlayerControllerFactory {
+class VideoPlayerFactory {
   static VideoPlayer create(String dataSource) {
     if(kIsWeb){
       return DefaultVideoPlayer(dataSource);

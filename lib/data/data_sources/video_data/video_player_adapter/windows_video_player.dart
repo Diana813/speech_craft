@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -23,10 +22,10 @@ class WindowsVideoPlayer implements VideoPlayer {
     _player.open(Media(url));
     _player.pause();
 
-    // _playingSubscription = _player.stream.playing.listen((bool playing) {
-    //   print("Playing state changed. Playing: $playing");
-    //   _updateState();
-    // });
+    _playingSubscription = _player.stream.playing.listen((bool playing) {
+      print("Playing state changed. Playing: $playing");
+      _updateState();
+    });
     // _positionSubscription = _player.stream.position.listen((Duration position) {
     //   _updatePosition();
     // });
@@ -54,13 +53,6 @@ class WindowsVideoPlayer implements VideoPlayer {
       isBuffering: _player.state.buffering,
     );
     _stateController.add(state);
-  }
-
-  VideoPlayerPosition _updatePosition() {
-    return VideoPlayerPosition(
-      position: _player.state.position,
-      duration: _player.state.duration,
-    );
   }
 
   @override
@@ -106,6 +98,11 @@ class WindowsVideoPlayer implements VideoPlayer {
     String youtubeVideoUrl = '$youtubeUrl/watch?v=$videoId';
     return Uri.parse('http://127.0.0.1:5000/api/video')
         .replace(queryParameters: {'youtube_url': youtubeVideoUrl}).toString();
+  }
+
+  @override
+  Future<int> get positionInMillis async {
+    return await _player.state.position.inMilliseconds;
   }
 }
 

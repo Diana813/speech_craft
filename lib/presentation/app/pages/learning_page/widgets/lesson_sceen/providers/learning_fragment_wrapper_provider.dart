@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/injection_container.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/search_results/search_results_cubit.dart';
 
 import '../../../cubit/learning/control_cubit.dart';
 import '../../../cubit/learning/learning_cubit.dart';
@@ -30,6 +31,9 @@ class LearningFragmentWrapperProvider extends StatelessWidget {
         BlocProvider(
           create: (context) => ControlCubit(),
         ),
+        BlocProvider(
+          create: (context) => serviceLocator<SearchResultsCubit>(),
+        )
       ],
       child: const LearningFragment(),
     );

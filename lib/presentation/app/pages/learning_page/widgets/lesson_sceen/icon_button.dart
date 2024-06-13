@@ -18,6 +18,7 @@ class AppIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       style: ButtonStyle(
+        minimumSize: MaterialStateProperty.all<Size>(const Size(40, 40)),
         padding: MaterialStateProperty.all<EdgeInsets>(
             const EdgeInsets.symmetric(horizontal: 20)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(

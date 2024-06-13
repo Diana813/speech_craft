@@ -39,7 +39,7 @@ void main() {
           languageCode: 'en',
         );
         when(mockSearchUseCases.call(params: params)).thenAnswer(
-              (_) async => Left(dummySearchResults),
+              (_) async => const Left(dummySearchResults),
         );
       },
       build: () => SearchResultsCubit(searchUseCases: mockSearchUseCases),
@@ -50,9 +50,8 @@ void main() {
       ),
       expect: () => [
         const SearchResultsLoading(),
-        SearchResultsLoaded(
+        const SearchResultsLoaded(
           videos: dummySearchResults,
-          videoIdInitial: dummySearchResults.first.videoId,
         ),
       ],
     );

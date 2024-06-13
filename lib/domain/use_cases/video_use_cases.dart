@@ -28,11 +28,10 @@ class UploadVideoUseCase extends UseCase<List<Timestamp>, VideoUrlParams> {
 
     final uploadResult =
         await videoRepository.uploadVideo(videoId: params.videoId);
-    print("upload result: $uploadResult");
     if (uploadResult.isRight()) {
-      print("upload is right");
       return Right(ServerFailure());
     }
+
     return await pausesRepository.getPauses(videoId: params.videoId);
   }
 }

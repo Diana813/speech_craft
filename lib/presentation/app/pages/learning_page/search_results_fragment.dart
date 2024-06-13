@@ -29,6 +29,8 @@ class SearchResults extends StatelessWidget {
           );
         } else if (state is SearchResultsLoaded) {
           return SearchResultsList(videos: state.videos);
+        } else if (state is VideoIdChanged) {
+          return SearchResultsList(videos: state.videos);
         } else if (state is SearchResultsAtError) {
           return Center(child: Text('Error: ${state.errorMessage}'));
         } else {

@@ -13,6 +13,8 @@ abstract class VideoPlayer {
 
   void seekTo(Duration position);
 
+  Future<int> get positionInMillis;
+
   bool get isPlaying;
 
   Stream<VideoPlayerState> get onStateChanged;

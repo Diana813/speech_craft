@@ -46,7 +46,7 @@ void main() {
     whenListen(
         mockCubit,
         Stream.fromIterable(
-            const [SearchResultsLoaded(videos: [], videoIdInitial: '')]),
+            const [SearchResultsLoaded(videos: [])]),
         initialState: const SearchResultsInitial());
 
     await tester.pumpWidget(testWidget(mockCubit));

@@ -10,7 +10,14 @@ final class LearningInitial extends LearningState {}
 
 final class VideoUploading extends LearningState {}
 
-final class VideoUploaded extends LearningState {}
+final class VideoUploaded extends LearningState {
+  final List<Timestamp> pauseTimestamps;
+
+  VideoUploaded({required this.pauseTimestamps});
+
+  @override
+  List<Object?> get props => [pauseTimestamps];
+}
 
 final class VideoUploadingAtError extends LearningState {
   final String errorMessage;
@@ -20,7 +27,5 @@ final class VideoUploadingAtError extends LearningState {
   @override
   List<Object?> get props => [errorMessage];
 }
-
-final class NoVideoIdProvided extends LearningState {}
 
 final class SentenceRepeatedAndSubmitted extends LearningState {}
