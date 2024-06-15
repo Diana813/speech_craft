@@ -11,10 +11,10 @@ class WindowsVideoPlayer implements VideoPlayer {
   late final VideoController _controller;
   final _stateController = StreamController<VideoPlayerState>();
 
-  late final StreamSubscription<bool> _playingSubscription;
-  late final StreamSubscription<Duration> _positionSubscription;
-  late final StreamSubscription<Duration> _durationSubscription;
-  late final StreamSubscription<bool> _bufferingSubscription;
+  // late final StreamSubscription<bool> _playingSubscription;
+  // late final StreamSubscription<Duration> _positionSubscription;
+  // late final StreamSubscription<Duration> _durationSubscription;
+  // late final StreamSubscription<bool> _bufferingSubscription;
 
   WindowsVideoPlayer(String videoId) : _player = _initializePlayer() {
     _initializeController();
@@ -22,10 +22,10 @@ class WindowsVideoPlayer implements VideoPlayer {
     _player.open(Media(url));
     _player.pause();
 
-    _playingSubscription = _player.stream.playing.listen((bool playing) {
-      print("Playing state changed. Playing: $playing");
-      _updateState();
-    });
+    // _playingSubscription = _player.stream.playing.listen((bool playing) {
+    //   print("Playing state changed. Playing: $playing");
+    //   _updateState();
+    // });
     // _positionSubscription = _player.stream.position.listen((Duration position) {
     //   _updatePosition();
     // });
@@ -50,6 +50,7 @@ class WindowsVideoPlayer implements VideoPlayer {
   void _updateState() {
     final state = VideoPlayerState(
       isPlaying: _player.state.playing,
+      isPaused: !_player.state.playing,
       isBuffering: _player.state.buffering,
     );
     _stateController.add(state);
@@ -75,10 +76,10 @@ class WindowsVideoPlayer implements VideoPlayer {
 
   @override
   void dispose() {
-    _playingSubscription.cancel();
-    _positionSubscription.cancel();
-    _durationSubscription.cancel();
-    _bufferingSubscription.cancel();
+    // _playingSubscription.cancel();
+    // _positionSubscription.cancel();
+    // _durationSubscription.cancel();
+    // _bufferingSubscription.cancel();
     _player.dispose();
     _stateController.close();
   }
@@ -102,7 +103,7 @@ class WindowsVideoPlayer implements VideoPlayer {
 
   @override
   Future<int> get positionInMillis async {
-    return await _player.state.position.inMilliseconds;
+    return _player.state.position.inMilliseconds;
   }
 }
 

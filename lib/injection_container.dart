@@ -11,6 +11,7 @@ import 'package:speech_craft/domain/use_cases/query_params_use_cases.dart';
 import 'package:speech_craft/domain/use_cases/search_use_cases.dart';
 import 'package:speech_craft/domain/use_cases/video_use_cases.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/learning_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/video_loader/video_loader_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/search_results/search_results_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/welcome_page/cubit/query_params/query_params_cubit.dart';
 
@@ -81,19 +82,21 @@ Future<void> init() async {
       () => VideoRemoteDataSourceImpl());
 
   serviceLocator.registerFactory<PausesRemoteDataSource>(
-          () => PausesRemoteDataSourceImpl());
+      () => PausesRemoteDataSourceImpl());
 
   serviceLocator.registerFactory<VideoRepository>(
       () => VideoRepositoryImpl(videoRemoteDataSourceImpl: serviceLocator()));
 
   serviceLocator.registerFactory<PausesRepository>(
-          () => PausesRepositoryImpl(pausesRemoteDataSourceImpl: serviceLocator()));
+      () => PausesRepositoryImpl(pausesRemoteDataSourceImpl: serviceLocator()));
 
   // domain layer
-  serviceLocator.registerFactory(
-      () => UploadVideoUseCase(videoRepository: serviceLocator(), pausesRepository: serviceLocator()));
+  serviceLocator.registerFactory(() => UploadVideoUseCase(
+      videoRepository: serviceLocator(), pausesRepository: serviceLocator()));
 
   // presentation layer
-  serviceLocator.registerFactory(
-      () => LearningCubit(uploadVideoUseCase: serviceLocator(), videoId: ''));
+  serviceLocator.registerFactory(() => LearningCubit());
+
+  serviceLocator.registerFactory(() =>
+      VideoLoaderCubit(uploadVideoUseCase: serviceLocator(), videoId: ''));
 }

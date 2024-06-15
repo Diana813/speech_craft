@@ -5,6 +5,7 @@ import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning
 
 import '../../../cubit/learning/learning_cubit.dart';
 import '../../../cubit/learning/start_button_cubit.dart';
+import '../../../cubit/learning/video_loader/video_loader_cubit.dart';
 import '../../../cubit/learning/video_player/video_player_cubit.dart';
 import '../../../cubit/search_results/search_results_cubit.dart';
 import '../learning_fragment/learning_page_small.dart';
@@ -19,8 +20,10 @@ class LearningPageSmallWrapperProvider extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LearningCubit(
-              uploadVideoUseCase: serviceLocator(), videoId: videoId),
+            create: (context) => VideoLoaderCubit(
+                videoId: videoId, uploadVideoUseCase: serviceLocator())),
+        BlocProvider(
+          create: (context) => LearningCubit(),
         ),
         BlocProvider(
           create: (context) => VideoPlayerCubit(videoId),

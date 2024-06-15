@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 
-class StartButtonCubit extends Cubit<bool> {
-  StartButtonCubit() : super(false);
+enum StartButtonState { trainingStarted, trainingNotStarted}
 
-  void startTraining() => emit(true);
+class StartButtonCubit extends Cubit<StartButtonState> {
+  StartButtonCubit() : super(StartButtonState.trainingNotStarted);
+
+  void startTraining() => emit(StartButtonState.trainingStarted);
 }

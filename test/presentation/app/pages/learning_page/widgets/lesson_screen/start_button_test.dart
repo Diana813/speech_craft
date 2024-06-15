@@ -8,29 +8,27 @@ import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/start_button.dart';
 
-class MockStartButtonCubit extends MockCubit<bool>
+class MockStartButtonCubit extends MockCubit<StartButtonState>
     implements StartButtonCubit {}
 
 class MockVideoPlayerCubit extends MockCubit<VideoPlayerState> implements VideoPlayerCubit {}
 
 void main() {
-  testWidgets('StartButton renders correctly', (WidgetTester tester) async {
+  testWidgets('StartButton renders correctly when training not started', (WidgetTester tester) async {
     final mockStartButtonCubit = MockStartButtonCubit();
-
-    mockStartButtonCubit.emit(false);
 
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: BlocProvider.value(
             value: mockStartButtonCubit,
-            child: const StartButton(),
+            child: const StartButton(trainingState: StartButtonState.trainingNotStarted),
           ),
         ),
       ),
     );
 
-    expect(find.text(startTraning), findsOneWidget);
+    expect(find.text(startTraining), findsOneWidget);
 
     final iconButtonFinder = find.byType(IconButton);
     expect(iconButtonFinder, findsOneWidget);
@@ -40,4 +38,30 @@ void main() {
     expect(iconWidget.size, 100.0);
     expect(iconWidget.color, Colors.red);
   });
+
+  testWidgets('StartButton renders correctly when training started', (WidgetTester tester) async {
+    final mockStartButtonCubit = MockStartButtonCubit();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: BlocProvider.value(
+            value: mockStartButtonCubit,
+            child: const StartButton(trainingState: StartButtonState.trainingStarted),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text(''), findsOneWidget);
+
+    final iconButtonFinder = find.byType(IconButton);
+    expect(iconButtonFinder, findsOneWidget);
+    expect(tester.widget<IconButton>(iconButtonFinder).onPressed, isNull);
+    final iconButton = tester.widget<IconButton>(iconButtonFinder);
+    final iconWidget = iconButton.icon as Icon;
+    expect(iconWidget.size, 100.0);
+    expect(iconWidget.color, Colors.grey);
+  });
 }
+

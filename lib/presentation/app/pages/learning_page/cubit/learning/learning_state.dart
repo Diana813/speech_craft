@@ -8,24 +8,12 @@ sealed class LearningState extends Equatable {
 
 final class LearningInitial extends LearningState {}
 
-final class VideoUploading extends LearningState {}
 
-final class VideoUploaded extends LearningState {
-  final List<Timestamp> pauseTimestamps;
+final class AudioRecordedState extends LearningState {
+  final Uint8List audioBytes;
 
-  VideoUploaded({required this.pauseTimestamps});
-
-  @override
-  List<Object?> get props => [pauseTimestamps];
-}
-
-final class VideoUploadingAtError extends LearningState {
-  final String errorMessage;
-
-  VideoUploadingAtError({required this.errorMessage});
+  AudioRecordedState({required this.audioBytes});
 
   @override
-  List<Object?> get props => [errorMessage];
+  List<Object?> get props => [audioBytes];
 }
-
-final class SentenceRepeatedAndSubmitted extends LearningState {}

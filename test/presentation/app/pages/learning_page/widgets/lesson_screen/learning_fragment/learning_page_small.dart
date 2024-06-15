@@ -11,7 +11,6 @@ void main() {
     testWidgets(
       'displays LearningScreen with correct videoId',
           (WidgetTester tester) async {
-        const videoId = '456';
 
         await tester.pumpWidget(const MaterialApp(
           home: LearningPageSmall(),

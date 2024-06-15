@@ -23,26 +23,24 @@ class VideoLoadedView extends StatelessWidget {
           child: Container(
             color: Colors.black87,
             padding: const EdgeInsets.symmetric(vertical: 16),
-            child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
-              builder: (context, state) {
-                final cubit = context.read<VideoPlayerCubit>();
-                return cubit.videoPlayerWidget;
-              },
-            ),
+            child: context.read<VideoPlayerCubit>().videoPlayerWidget,
           ),
         ),
         Expanded(
           flex: 3,
           child: BlocBuilder<LearningCubit, LearningState>(
             builder: (context, state) {
-              return BlocBuilder<StartButtonCubit, bool>(
-                builder: (context, trainingStarted) {
+              return BlocBuilder<StartButtonCubit, StartButtonState>(
+                builder: (context, trainingState) {
                   return BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
                     builder: (context, videoState) {
-                      if (!videoState.isPlaying && trainingStarted) {
+                      if (videoState.isPaused && state is AudioRecordedState) {
+                        return Container();
+                      } else if (videoState.isPaused) {
+                        context.read<LearningCubit>().recordUserAudio();
                         return const RepeatingView();
                       } else {
-                        return const StartButton();
+                        return StartButton(trainingState: trainingState);
                       }
                     },
                   );

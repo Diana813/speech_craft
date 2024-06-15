@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/common/strings.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/control_cubit.dart';
 
+import '../../../cubit/learning/start_button_cubit.dart';
+import '../../../cubit/learning/video_player/video_player_cubit.dart';
+
 class SmallScreenBottomControls extends StatelessWidget {
   const SmallScreenBottomControls({super.key});
 
@@ -33,7 +36,8 @@ class SmallScreenBottomControls extends StatelessWidget {
           if (index == 0) {
             context.read<ControlCubit>().goToHome();
           } else if (index == 1) {
-            context.read<ControlCubit>().playVideoSegment();
+            context.read<StartButtonCubit>().startTraining();
+            context.read<VideoPlayerCubit>().playIfNotPlaying();
           } else if (index == 2) {
             context.read<ControlCubit>().replayVideoSegment();
           }

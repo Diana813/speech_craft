@@ -12,11 +12,13 @@ const language = 'Język';
 
 const String googleBaseUrl = 'www.googleapis.com';
 const String youtubeDataEndpoint = '/youtube/v3/search';
-const String translationApiUrl = 'https://translation.googleapis.com/language/translate/v2';
+const String translationApiUrl =
+    'https://translation.googleapis.com/language/translate/v2';
 const String youtubeUrl = 'https://www.youtube.com';
 
-const String waitForVideoMessage = 'Chwileczkę, dzielę video na fragmenty do powtórzenia';
-const String startTraning = 'Rozpocznij trening';
+const String waitForVideoMessage =
+    'Chwileczkę, dzielę video na fragmenty do powtórzenia';
+const String startTraining = 'Rozpocznij trening';
 const String repeat = 'Powtórz';
 const String submit = 'Zatwierdź';
 
@@ -24,3 +26,17 @@ const start = 'Start';
 const train = 'Trenuj';
 const replay = 'Powtórka';
 
+const chooseVideo = 'Wybierz film';
+
+const words = "Słowa";
+const accent = "Akcent";
+const intonation = "Intonacja";
+const pronunciation = "Wymowa";
+
+const accentFeedback = 'Słowa zaakcentowane inaczej niż zrobił to lektor';
+
+const lector = "Lektor: ";
+const you = "Ty: ";
+const close = "Zamknij";
+const time = "Czas";
+const pitch = "Wysokość tonu";

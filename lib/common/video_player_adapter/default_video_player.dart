@@ -17,14 +17,15 @@ class DefaultVideoPlayer implements VideoPlayer {
           params: const YoutubePlayerParams(
               showControls: false, enableCaption: false),
         ) {
-    _controller.stream.listen((YoutubePlayerValue value) {
-      _updateState();
-    });
+    // _controller.stream.listen((YoutubePlayerValue value) {
+    //   _updateState();
+    // });
   }
 
   void _updateState() {
     final state = VideoPlayerState(
       isPlaying: _controller.value.playerState == PlayerState.playing,
+      isPaused: _controller.value.playerState == PlayerState.paused,
       isBuffering: _controller.value.playerState == PlayerState.buffering,
     );
     _stateController.add(state);

@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:speech_craft/data/data_sources/video_data/video_player_adapter/video_player.dart';
+import 'package:speech_craft/common/video_player_adapter/video_player.dart';
+
 
 class VideoPlayerHelper {
   final VideoPlayer player;

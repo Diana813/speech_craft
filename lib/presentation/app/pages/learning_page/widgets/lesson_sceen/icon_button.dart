@@ -18,18 +18,17 @@ class AppIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all<Size>(const Size(40, 40)),
-        padding: MaterialStateProperty.all<EdgeInsets>(
+        padding: WidgetStateProperty.all<EdgeInsets>(
             const EdgeInsets.symmetric(horizontal: 20)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             )),
-        shadowColor: MaterialStateProperty.all<Color>(AppTheme.lightTheme.shadowColor),
-        elevation: MaterialStateProperty.all(1.0),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+        shadowColor: WidgetStateProperty.all<Color>(AppTheme.lightTheme.shadowColor),
+        elevation: WidgetStateProperty.all(1.0),
+        backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 return backgroundColorPressed;
               }
               return backgroundColorDefault;

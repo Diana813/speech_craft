@@ -1,28 +1,39 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../../data/models/pauses_response/timestamps.dart';
-import '../../../../../../domain/use_cases/video_use_cases.dart';
+import '../../../../../../common/audio_helper.dart';
 
 part 'learning_state.dart';
 
 class LearningCubit extends Cubit<LearningState> {
-  final String videoId;
-  final UploadVideoUseCase uploadVideoUseCase;
+  late final AudioHelper _audioHelper;
+  late final Uint8List _audioBytes;
 
-  LearningCubit({required this.uploadVideoUseCase, required this.videoId})
-      : super(LearningInitial());
+  LearningCubit() : super(LearningInitial()) {
+    _initialize();
+  }
 
-  void onVideoUploading() async {
-    emit(VideoUploading());
-    final videoUploadedOrFailure =
-        await uploadVideoUseCase.call(params: VideoUrlParams(videoId: videoId));
+  Future<void> recordUserAudio() async {
+    var stream = await _audioHelper.record();
+    var byteList = await stream.toList();
+    _audioBytes = Uint8List.fromList(byteList.expand((x) => x).toList());
+  }
 
-    videoUploadedOrFailure.fold(
-      (timestamps) => emit(VideoUploaded(pauseTimestamps: timestamps)),
-      (failure) =>
-          emit(VideoUploadingAtError(errorMessage: failure.getMessage())),
-    );
+  void onUserRecordingSubmitPressed() async {
+    await _audioHelper.stopRecording();
+    emit(AudioRecordedState(audioBytes: _audioBytes));
+  }
+
+  void _initialize() {
+    _audioHelper = AudioHelper();
+  }
+
+  @override
+  Future<void> close() {
+    _audioHelper.dispose();
+    return super.close();
   }
 }
