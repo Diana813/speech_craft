@@ -1,41 +1,21 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+
 import '../../../../common/strings.dart';
-import '../../../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 import 'video_player.dart';
 
 class WindowsVideoPlayer implements VideoPlayer {
   final Player _player;
   late final VideoController _controller;
-  final _stateController = StreamController<VideoPlayerState>();
-
-  // late final StreamSubscription<bool> _playingSubscription;
-  // late final StreamSubscription<Duration> _positionSubscription;
-  // late final StreamSubscription<Duration> _durationSubscription;
-  // late final StreamSubscription<bool> _bufferingSubscription;
 
   WindowsVideoPlayer(String videoId) : _player = _initializePlayer() {
     _initializeController();
     String url = _getVideoUrl(videoId: videoId);
     _player.open(Media(url));
     _player.pause();
-
-    // _playingSubscription = _player.stream.playing.listen((bool playing) {
-    //   print("Playing state changed. Playing: $playing");
-    //   _updateState();
-    // });
-    // _positionSubscription = _player.stream.position.listen((Duration position) {
-    //   _updatePosition();
-    // });
-    // _durationSubscription = _player.stream.duration.listen((Duration duration) {
-    //   _updatePosition();
-    // });
-    // _bufferingSubscription = _player.stream.buffering.listen((bool buffering) {
-    //   print("Playing state changed. Buffering: $buffering");
-    //   _updateState();
-    // });
   }
 
   static Player _initializePlayer() {
@@ -47,48 +27,35 @@ class WindowsVideoPlayer implements VideoPlayer {
     _controller = VideoController(_player);
   }
 
-  void _updateState() {
-    final state = VideoPlayerState(
-      isPlaying: _player.state.playing,
-      isPaused: !_player.state.playing,
-      isBuffering: _player.state.buffering,
-    );
-    _stateController.add(state);
-  }
-
   @override
   void initialize() {}
 
   @override
-  void play() {
-    _player.play();
+  Future<void> play() async {
+    await _player.play();
   }
 
   @override
-  void pause() {
-    _player.pause();
+  Future<void> pause() async {
+    await _player.pause();
   }
 
   @override
-  void seekTo(Duration position) {
-    _player.seek(position);
+  Future<void> replay({required Duration start, required Duration end}) async {
+    await _player.seek(start);
+    await _player.play();
+    await Future.delayed(
+        Duration(milliseconds: end.inMilliseconds - start.inMilliseconds));
+    await _player.pause();
   }
 
   @override
-  void dispose() {
-    // _playingSubscription.cancel();
-    // _positionSubscription.cancel();
-    // _durationSubscription.cancel();
-    // _bufferingSubscription.cancel();
-    _player.dispose();
-    _stateController.close();
+  Future<void> dispose() async {
+    await _player.dispose();
   }
 
   @override
   bool get isPlaying => _player.state.playing;
-
-  @override
-  Stream<VideoPlayerState> get onStateChanged => _stateController.stream;
 
   @override
   Widget get videoPlayerWidget => WindowsVideoPlayerWidget(

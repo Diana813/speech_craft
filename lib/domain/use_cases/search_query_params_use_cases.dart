@@ -1,12 +1,12 @@
 import 'package:speech_craft/domain/entities/language_entity.dart';
 
 import '../entities/region_code_entity.dart';
-import '../repositories/query_params_repository.dart';
+import '../repositories/search_query_params_repository.dart';
 
-class QueryParamsUseCases {
-  final QueryParamsRepository queryParamsRepository;
+class SearchQueryParamsUseCases {
+  final SearchQueryParamsRepository queryParamsRepository;
 
-  QueryParamsUseCases({required this.queryParamsRepository});
+  SearchQueryParamsUseCases({required this.queryParamsRepository});
 
   List<LanguageEntity> getLanguages() {
     return queryParamsRepository.getLanguagesFromDatasource();

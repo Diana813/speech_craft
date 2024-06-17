@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:speech_craft/common/strings.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/start_button_cubit.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/video_player/video_player_cubit.dart';
-import 'package:speech_craft/presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/start_button_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/video_player/video_player_cubit.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/video_player/video_player_state.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/start_button.dart';
 
 class MockStartButtonCubit extends MockCubit<StartButtonState>

@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:just_audio/just_audio.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:record/record.dart';
 
 class AudioHelper {
@@ -14,7 +14,6 @@ class AudioHelper {
             .startStream(const RecordConfig(encoder: AudioEncoder.pcm16bits));
         return stream;
       } catch (e) {
-        print(e);
         throw Exception(e);
       }
     } else {
@@ -27,8 +26,7 @@ class AudioHelper {
   }
 
   Future<void> play(String url) async {
-    await _player.setUrl(url);
-    await _player.play();
+    await _player.play(UrlSource(url));
   }
 
   void dispose() {

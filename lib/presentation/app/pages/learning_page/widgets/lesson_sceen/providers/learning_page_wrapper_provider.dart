@@ -19,7 +19,7 @@ class LearningPageWrapperProvider extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => serviceLocator<SearchResultsCubit>(),
-        )
+        ),
       ],
       child: LearningPage(
         keyWords: keywords,

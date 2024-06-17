@@ -6,9 +6,9 @@
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:speech_craft/domain/entities/language_entity.dart' as _i4;
 import 'package:speech_craft/domain/entities/region_code_entity.dart' as _i5;
-import 'package:speech_craft/domain/repositories/query_params_repository.dart'
+import 'package:speech_craft/domain/repositories/search_query_params_repository.dart'
     as _i2;
-import 'package:speech_craft/domain/use_cases/query_params_use_cases.dart'
+import 'package:speech_craft/domain/use_cases/search_query_params_use_cases.dart'
     as _i3;
 
 // ignore_for_file: type=lint
@@ -25,7 +25,7 @@ import 'package:speech_craft/domain/use_cases/query_params_use_cases.dart'
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeQueryParamsRepository_0 extends _i1.SmartFake
-    implements _i2.QueryParamsRepository {
+    implements _i2.SearchQueryParamsRepository {
   _FakeQueryParamsRepository_0(
     Object parent,
     Invocation parentInvocation,
@@ -39,9 +39,9 @@ class _FakeQueryParamsRepository_0 extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockQueryParamsUseCases extends _i1.Mock
-    implements _i3.QueryParamsUseCases {
+    implements _i3.SearchQueryParamsUseCases {
   @override
-  _i2.QueryParamsRepository get queryParamsRepository => (super.noSuchMethod(
+  _i2.SearchQueryParamsRepository get queryParamsRepository => (super.noSuchMethod(
         Invocation.getter(#queryParamsRepository),
         returnValue: _FakeQueryParamsRepository_0(
           this,
@@ -51,7 +51,7 @@ class MockQueryParamsUseCases extends _i1.Mock
           this,
           Invocation.getter(#queryParamsRepository),
         ),
-      ) as _i2.QueryParamsRepository);
+      ) as _i2.SearchQueryParamsRepository);
 
   @override
   List<_i4.LanguageEntity> getLanguages() => (super.noSuchMethod(

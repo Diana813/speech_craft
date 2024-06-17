@@ -12,7 +12,7 @@ abstract class SearchQueryParamsDataSource {
   List<Country> getCountries();
 }
 
-class QueryParamsRemoteDataSourceImpl implements SearchQueryParamsDataSource {
+class SearchQueryParamsRemoteDataSourceImpl implements SearchQueryParamsDataSource {
   @override
   List<Country> getCountries() {
     List<dynamic> result = jsonDecode(countries);

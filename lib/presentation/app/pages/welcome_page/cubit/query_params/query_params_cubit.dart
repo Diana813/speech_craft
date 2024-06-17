@@ -4,12 +4,12 @@ import 'package:meta/meta.dart';
 import 'package:speech_craft/domain/entities/language_entity.dart';
 
 import '../../../../../../domain/entities/region_code_entity.dart';
-import '../../../../../../domain/use_cases/query_params_use_cases.dart';
+import '../../../../../../domain/use_cases/search_query_params_use_cases.dart';
 
 part 'query_params_state.dart';
 
 class QueryParamsCubit extends Cubit<QueryParamsState> {
-  final QueryParamsUseCases queryParamsUseCases;
+  final SearchQueryParamsUseCases queryParamsUseCases;
 
   QueryParamsCubit({required this.queryParamsUseCases})
       : super(const QueryParamsInitial());

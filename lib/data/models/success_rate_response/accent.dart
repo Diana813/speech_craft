@@ -1,12 +1,14 @@
-class AccentData {
+import 'package:equatable/equatable.dart';
+
+class AccentData extends Equatable {
   final String word;
   final List<double> sampledAudioLector;
   final List<double> sampledAudioUser;
 
-  AccentData(
+  const AccentData(
       {required this.word,
-        required this.sampledAudioLector,
-        required this.sampledAudioUser});
+      required this.sampledAudioLector,
+      required this.sampledAudioUser});
 
   factory AccentData.fromJson(Map<String, dynamic> json) {
     return AccentData(
@@ -17,4 +19,7 @@ class AccentData {
           json['sampled_audio_user'].map((x) => x.toDouble())),
     );
   }
+
+  @override
+  List<Object?> get props => [word, sampledAudioLector, sampledAudioUser];
 }

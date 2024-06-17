@@ -1,8 +1,10 @@
-class Transcription {
-  String lectorTranscription;
-  String userTranscription;
+import 'package:equatable/equatable.dart';
 
-  Transcription({
+class Transcription extends Equatable {
+  final String lectorTranscription;
+  final String userTranscription;
+
+  const Transcription({
     required this.lectorTranscription,
     required this.userTranscription,
   });
@@ -13,4 +15,7 @@ class Transcription {
       userTranscription: json['userTranscription'] ?? '',
     );
   }
+
+  @override
+  List<Object?> get props => [lectorTranscription, userTranscription];
 }

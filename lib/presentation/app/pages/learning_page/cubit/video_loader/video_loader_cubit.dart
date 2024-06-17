@@ -17,12 +17,16 @@ class VideoLoaderCubit extends Cubit<VideoLoaderState> {
   void onVideoUploading() async {
     emit(VideoUploading());
     final videoUploadedOrFailure =
-    await uploadVideoUseCase.call(params: VideoUrlParams(videoId: videoId));
+        await uploadVideoUseCase.call(params: VideoUrlParams(videoId: videoId));
 
     videoUploadedOrFailure.fold(
-          (timestamps) => emit(VideoUploaded(pauseTimestamps: timestamps)),
-          (failure) =>
+      (timestamps) => emit(VideoUploaded(pauseTimestamps: timestamps)),
+      (failure) =>
           emit(VideoUploadingAtError(errorMessage: failure.getMessage())),
     );
+  }
+
+  void resetVideoUploadingState(){
+    emit(VideoLoaderInitial());
   }
 }

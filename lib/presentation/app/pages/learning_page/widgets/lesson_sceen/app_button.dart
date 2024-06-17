@@ -14,19 +14,19 @@ class AppButton extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ElevatedButton(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               )),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.pressed)) {
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                  (Set<WidgetState> states) {
+                if (states.contains(WidgetState.pressed)) {
                   return Theme.of(context).primaryColorDark;
                 }
                 return AppTheme.lightTale;
               }),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-                  (Set<MaterialState> states) {
+          textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+                  (Set<WidgetState> states) {
                 return Theme.of(context).textTheme.bodyMedium!;
               }),
         ),

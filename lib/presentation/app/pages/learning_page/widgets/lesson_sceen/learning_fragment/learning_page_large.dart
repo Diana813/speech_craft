@@ -5,6 +5,7 @@ import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson
 
 import '../../../../../../../common/strings.dart';
 import '../../../../../../../data/models/search_request/search_key_words.dart';
+import '../../../cubit/video_loader/video_loader_cubit.dart';
 import '../../../learning_fragment.dart';
 import '../../../search_results_fragment.dart';
 import '../bottom_controls/large_screen_bottom_controls.dart';
@@ -56,6 +57,8 @@ class LearningPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<VideoLoaderCubit>(context).onVideoUploading();
+
     return const Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.max,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:speech_craft/injection_container.dart';
+import 'package:speech_craft/presentation/app/pages/learning_page/cubit/search_results/search_results_cubit.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/search_results_fragment.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/learning_fragment/learning_page_large.dart';
 
@@ -48,7 +50,11 @@ class _LearningPageState extends State<LearningPage> {
                         .read<ScreenResizedNavigationCubit>()
                         .lessonScreenDisplayed(
                             isLessonScreenDisplayed: isLessonScreenVisible);
-                    return LearningPageLarge(keywords: widget.keyWords);
+                    return BlocProvider(
+                      create: (context) =>
+                          SearchResultsCubit(searchUseCases: serviceLocator()),
+                      child: LearningPageLarge(keywords: widget.keyWords),
+                    );
                   },
                 ),
               ),

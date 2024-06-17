@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../common/strings.dart';
 import '../../../../../common/theme.dart';
-import '../../cubit/learning/start_button_cubit.dart';
-import '../../cubit/learning/video_player/video_player_cubit.dart';
+import '../../cubit/start_button_cubit.dart';
+import '../../cubit/video_player/video_player_cubit.dart';
 
 class StartButton extends StatelessWidget {
   final StartButtonState trainingState;

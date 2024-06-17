@@ -20,7 +20,6 @@ class VideoRepositoryImpl implements VideoRepository {
     } on ServerException catch (_) {
       return right(ServerFailure());
     } catch (e) {
-      print("general error: $e");
       return right(GeneralFailure());
     }
   }

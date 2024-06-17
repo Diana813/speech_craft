@@ -3,64 +3,52 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
 import 'video_player.dart';
 
 class DefaultVideoPlayer implements VideoPlayer {
   final YoutubePlayerController _controller;
-  final _stateController = StreamController<VideoPlayerState>();
+  late final String videoId;
 
-  DefaultVideoPlayer(String videoId)
+  DefaultVideoPlayer(this.videoId)
       : _controller = YoutubePlayerController.fromVideoId(
           videoId: videoId,
           autoPlay: false,
           params: const YoutubePlayerParams(
               showControls: false, enableCaption: false),
-        ) {
-    // _controller.stream.listen((YoutubePlayerValue value) {
-    //   _updateState();
-    // });
-  }
-
-  void _updateState() {
-    final state = VideoPlayerState(
-      isPlaying: _controller.value.playerState == PlayerState.playing,
-      isPaused: _controller.value.playerState == PlayerState.paused,
-      isBuffering: _controller.value.playerState == PlayerState.buffering,
-    );
-    _stateController.add(state);
-  }
+        ) {}
 
   @override
   void initialize() {}
 
   @override
-  void play() {
-    _controller.playVideo();
+  Future<void> play() async {
+    await _controller.playVideo();
   }
 
   @override
-  void pause() {
-    _controller.pauseVideo();
+  Future<void> pause() async {
+    await _controller.pauseVideo();
   }
 
   @override
-  void seekTo(Duration position) {
-    final value = position.inMilliseconds / 1000;
-    _controller.seekTo(seconds: value);
+  Future<void> replay({required Duration start, required Duration end}) async {
+    final startSeconds = start.inMilliseconds / 1000;
+    
+    _controller.loadVideoById(
+        videoId: videoId, startSeconds: startSeconds);
+
+    await Future.delayed(
+        Duration(milliseconds: end.inMilliseconds - start.inMilliseconds));
+    await _controller.pauseVideo();
   }
 
   @override
-  void dispose() {
-    _controller.close();
-    _stateController.close();
+  Future<void> dispose() async {
+    await _controller.close();
   }
 
   @override
   bool get isPlaying => _controller.value.playerState == PlayerState.playing;
-
-  @override
-  Stream<VideoPlayerState> get onStateChanged => _stateController.stream;
 
   @override
   Widget get videoPlayerWidget => DefaultVideoPlayerWidget(

@@ -1,33 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../../../presentation/app/pages/learning_page/cubit/learning/video_player/video_player_state.dart';
-
 abstract class VideoPlayer {
   void initialize();
 
-  void play();
+  Future<void> play();
 
-  void pause();
+  Future<void> pause();
 
-  void dispose();
+  Future<void> dispose();
 
-  void seekTo(Duration position);
+  Future<void> replay({required Duration start, required Duration end});
 
   Future<int> get positionInMillis;
 
   bool get isPlaying;
 
-  Stream<VideoPlayerState> get onStateChanged;
-
   Widget get videoPlayerWidget;
-}
-
-class VideoPlayerPosition {
-  final Duration position;
-  final Duration duration;
-
-  VideoPlayerPosition({
-    required this.position,
-    required this.duration,
-  });
 }

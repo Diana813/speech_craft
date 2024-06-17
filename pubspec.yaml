@@ -25,7 +25,7 @@ dependencies:
   jumping_dot: ^0.0.6
   permission_handler: ^11.3.1
   record: ^5.0.4
-  just_audio: ^0.9.36
+  audioplayers: ^6.0.0
   media_kit_libs_windows_video: any
   syncfusion_flutter_charts: ^24.1.44+1
   intl: ^0.18.0

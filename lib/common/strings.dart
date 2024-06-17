@@ -40,3 +40,6 @@ const you = "Ty: ";
 const close = "Zamknij";
 const time = "Czas";
 const pitch = "Wysokość tonu";
+
+const translation = "Tłumaczenie";
+const translationError = "Nie udało się przetłumaczyć :(";

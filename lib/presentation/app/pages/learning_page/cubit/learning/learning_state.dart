@@ -8,12 +8,22 @@ sealed class LearningState extends Equatable {
 
 final class LearningInitial extends LearningState {}
 
+final class FeedbackUploading extends LearningState {}
 
-final class AudioRecordedState extends LearningState {
-  final Uint8List audioBytes;
+final class FeedbackUploaded extends LearningState {
+  final UserSuccessRate userSuccessRate;
 
-  AudioRecordedState({required this.audioBytes});
+  FeedbackUploaded({required this.userSuccessRate});
 
   @override
-  List<Object?> get props => [audioBytes];
+  List<Object?> get props => [userSuccessRate];
+}
+
+final class FeedbackAtError extends LearningState {
+  final String errorMessage;
+
+  FeedbackAtError({required this.errorMessage});
+
+  @override
+  List<Object?> get props => [errorMessage];
 }

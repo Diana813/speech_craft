@@ -1,18 +1,22 @@
-import 'dart:typed_data';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
+import 'package:speech_craft/data/models/success_rate_response/user_success_rate.dart';
+import 'package:speech_craft/domain/use_cases/feedback_use_cases.dart';
 
 import '../../../../../../common/audio_helper.dart';
+import '../../../../../../data/models/upload_audio_request/time_range.dart';
 
 part 'learning_state.dart';
 
 class LearningCubit extends Cubit<LearningState> {
-  late final AudioHelper _audioHelper;
-  late final Uint8List _audioBytes;
+  final FeedbackUseCases feedbackUseCases;
 
-  LearningCubit() : super(LearningInitial()) {
+  late final AudioHelper _audioHelper;
+  Uint8List _audioBytes = Uint8List(0);
+  UserSuccessRate? successRate;
+
+  LearningCubit({required this.feedbackUseCases}) : super(LearningInitial()) {
     _initialize();
   }
 
@@ -22,9 +26,23 @@ class LearningCubit extends Cubit<LearningState> {
     _audioBytes = Uint8List.fromList(byteList.expand((x) => x).toList());
   }
 
-  void onUserRecordingSubmitPressed() async {
+  void onUserRecordingSubmitPressed({required TimeRange timeRange}) async {
+    successRate = null;
     await _audioHelper.stopRecording();
-    emit(AudioRecordedState(audioBytes: _audioBytes));
+    emit(FeedbackUploading());
+
+    final feedbackOrFailure = await feedbackUseCases.call(
+        params:
+            FeedbackRequestParams(bytes: _audioBytes, timeRange: timeRange));
+    feedbackOrFailure.fold((feedback) {
+      successRate = feedback;
+      emit(FeedbackUploaded(userSuccessRate: feedback));
+    }, (failure) => emit(FeedbackAtError(errorMessage: failure.getMessage())));
+  }
+
+  void onUserResumeVideo() {
+    successRate = null;
+    emit(LearningInitial());
   }
 
   void _initialize() {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/bottom_controls/small_screen_bottom_controls.dart';
 
+import '../../../cubit/video_loader/video_loader_cubit.dart';
 import '../../../learning_fragment.dart';
 
 class LearningPageSmall extends StatelessWidget {
@@ -8,6 +10,8 @@ class LearningPageSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<VideoLoaderCubit>(context).onVideoUploading();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

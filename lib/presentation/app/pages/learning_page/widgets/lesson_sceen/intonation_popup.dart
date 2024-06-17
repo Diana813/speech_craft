@@ -4,7 +4,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../../common/theme.dart';
 
-
 void showIntonationPopup(
     context, List<double> lectorPitchData, List<double> userPitchData) {
   showDialog(
@@ -18,7 +17,7 @@ void showIntonationPopup(
           height: MediaQuery.of(context).size.height * 0.6,
           child: SfCartesianChart(
             legend:
-            const Legend(isVisible: true, position: LegendPosition.bottom),
+                const Legend(isVisible: true, position: LegendPosition.bottom),
             primaryXAxis: const NumericAxis(
               title: AxisTitle(text: time),
             ),
@@ -41,6 +40,14 @@ void showIntonationPopup(
             ],
           ),
         ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text(close),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
       );
     },
   );
