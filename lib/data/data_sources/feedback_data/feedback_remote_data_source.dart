@@ -15,6 +15,10 @@ abstract class FeedbackRemoteDataSource {
 }
 
 class FeedbackRemoteDataSourceImpl extends FeedbackRemoteDataSource {
+  final http.Client client;
+
+  FeedbackRemoteDataSourceImpl({required this.client});
+
   final host = kIsWeb
       ? '127.0.0.1'
       : Platform.isAndroid
@@ -30,7 +34,7 @@ class FeedbackRemoteDataSourceImpl extends FeedbackRemoteDataSource {
       path: '/api/get_user_success_rate',
     );
 
-    var response = await http.get(url);
+    var response = await client.get(url);
 
     if (response.statusCode == 200) {
       return UserSuccessRate.fromJson(json.decode(response.body));

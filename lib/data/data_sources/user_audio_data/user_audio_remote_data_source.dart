@@ -10,6 +10,10 @@ abstract class UserAudioRemoteDataSource {
 }
 
 class UserAudioRemoteDataSourceImpl extends UserAudioRemoteDataSource {
+  final http.Client client;
+
+  UserAudioRemoteDataSourceImpl({required this.client});
+
   @override
   Future<String> fetchUserAudioUrl() async {
     final host = kIsWeb
@@ -25,7 +29,7 @@ class UserAudioRemoteDataSourceImpl extends UserAudioRemoteDataSource {
       path: '/api/get_user_audio',
     );
 
-    var response = await http.get(url, headers: {'Accept': 'audio/wav'});
+    var response = await client.get(url, headers: {'Accept': 'audio/wav'});
 
     if (response.statusCode == 200) {
       return "$url?timestamp=${DateTime.now().millisecondsSinceEpoch}";

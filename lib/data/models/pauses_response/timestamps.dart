@@ -6,7 +6,7 @@ class Timestamp extends Equatable {
   const Timestamp({required this.millis});
 
   factory Timestamp.fromJson(dynamic json) {
-    return Timestamp(millis: json as double);
+    return Timestamp(millis: double.parse(json['millis'] as String));
   }
 
   @override

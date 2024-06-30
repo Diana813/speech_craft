@@ -11,6 +11,10 @@ abstract class VideoRemoteDataSource {
 }
 
 class VideoRemoteDataSourceImpl extends VideoRemoteDataSource {
+  final http.Client client;
+
+  VideoRemoteDataSourceImpl({required this.client});
+
   @override
   Future<String> uploadVideoToCoreService({required String videoId}) async {
     String youtubeVideoUrl = '$youtubeUrl/watch?v=$videoId';
@@ -29,7 +33,7 @@ class VideoRemoteDataSourceImpl extends VideoRemoteDataSource {
       queryParameters: {'youtube_url': youtubeVideoUrl},
     );
 
-    final response = await http.get(url, headers: {'Accept': 'video/mp4'});
+    final response = await client.get(url, headers: {'Accept': 'video/mp4'});
 
     if (response.statusCode == 200 || response.statusCode == 304) {
       return response.statusCode.toString();

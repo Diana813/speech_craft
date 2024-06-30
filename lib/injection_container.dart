@@ -83,24 +83,24 @@ Future<void> init() async {
           translationRemoteDataSourceImpl: serviceLocator()));
 
   serviceLocator.registerFactory<FeedbackRemoteDataSource>(
-    () => FeedbackRemoteDataSourceImpl(),
+    () => FeedbackRemoteDataSourceImpl(client: serviceLocator()),
   );
 
   serviceLocator.registerFactory<UserAudioRemoteDataSource>(
-    () => UserAudioRemoteDataSourceImpl(),
+    () => UserAudioRemoteDataSourceImpl(client: serviceLocator()),
   );
 
   serviceLocator.registerFactory<FeedbackRepository>(() =>
       FeedbackRepositoryImpl(feedbackRemoteDataSourceImpl: serviceLocator()));
 
   serviceLocator.registerFactory<VideoRemoteDataSource>(
-      () => VideoRemoteDataSourceImpl());
+      () => VideoRemoteDataSourceImpl(client: serviceLocator()));
 
   serviceLocator.registerFactory<VideoRepository>(
       () => VideoRepositoryImpl(videoRemoteDataSourceImpl: serviceLocator()));
 
   serviceLocator.registerFactory<PausesRemoteDataSource>(
-      () => PausesRemoteDataSourceImpl());
+      () => PausesRemoteDataSourceImpl(client: serviceLocator()));
 
   serviceLocator.registerFactory<PausesRepository>(
       () => PausesRepositoryImpl(pausesRemoteDataSourceImpl: serviceLocator()));

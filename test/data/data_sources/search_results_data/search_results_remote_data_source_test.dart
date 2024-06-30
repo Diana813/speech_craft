@@ -11,7 +11,7 @@ import 'package:speech_craft/data/models/search_response/search_result.dart';
 import 'package:test/test.dart';
 
 import 'search_results_remote_data_source_test.mocks.dart';
-import 'youtube_search_dummy_data.dart';
+import '../youtube_search_dummy_data.dart';
 
 @GenerateNiceMocks([MockSpec<http.Client>()])
 void main() {

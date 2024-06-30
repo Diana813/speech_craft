@@ -12,6 +12,9 @@ final class SearchResultsInitial extends SearchResultsState {
   final SearchParams? queryParams;
 
   const SearchResultsInitial({this.queryParams});
+
+  @override
+  List<Object?> get props => [queryParams];
 }
 
 final class SearchResultsLoading extends SearchResultsState {

@@ -22,7 +22,6 @@ class LearningPage extends StatefulWidget {
 class _LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
-    bool isLessonScreenVisible = Breakpoints.mediumAndUp.isActive(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -46,10 +45,7 @@ class _LearningPageState extends State<LearningPage> {
                 builder: (context) => BlocBuilder<ScreenResizedNavigationCubit,
                     ScreenResizedNavigationState>(
                   builder: (context, state) {
-                    context
-                        .read<ScreenResizedNavigationCubit>()
-                        .lessonScreenDisplayed(
-                            isLessonScreenDisplayed: isLessonScreenVisible);
+
                     return BlocProvider(
                       create: (context) =>
                           SearchResultsCubit(searchUseCases: serviceLocator()),

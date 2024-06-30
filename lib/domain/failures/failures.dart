@@ -17,13 +17,6 @@ class ServerFailure extends Failure {
   }
 }
 
-class SavingDataFailure extends Failure {
-  @override
-  String getMessage() {
-    return savingDataFailureMessage;
-  }
-}
-
 class GeneralFailure extends Failure {
   @override
   String getMessage() {

@@ -29,6 +29,7 @@ dependencies:
   media_kit_libs_windows_video: any
   syncfusion_flutter_charts: ^24.1.44+1
   intl: ^0.18.0
+  code_uml: ^0.0.1
 
 dev_dependencies:
   test: ^1.24.9
@@ -38,6 +39,7 @@ dev_dependencies:
   mockito: ^5.4.4
   build_runner: ^2.4.9
   bloc_test: ^9.1.7
+  analyzer: any
 
 flutter:
   uses-material-design: true

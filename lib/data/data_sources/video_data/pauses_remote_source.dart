@@ -13,6 +13,10 @@ abstract class PausesRemoteDataSource {
 }
 
 class PausesRemoteDataSourceImpl extends PausesRemoteDataSource {
+  final http.Client client;
+
+  PausesRemoteDataSourceImpl({required this.client});
+
   @override
   Future<List<Timestamp>> getPauses({required String videoId}) async {
     String youtubeVideoUrl = '$youtubeUrl/watch?v=$videoId';
@@ -27,7 +31,7 @@ class PausesRemoteDataSourceImpl extends PausesRemoteDataSource {
       queryParameters: {'youtube_url': youtubeVideoUrl},
     );
 
-    var response = await http.get(url);
+    var response = await client.get(url);
 
     if (response.statusCode == 200) {
       List<dynamic> jsonList = json.decode(response.body);

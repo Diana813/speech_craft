@@ -5,18 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "0b2f2bd91ba804e53a61d757b986f89f1f9eaed5b11e4b2f5a2468d86d6c9fc7"
+      sha256: ae92f5d747aee634b87f89d9946000c2de774be1d6ac3e58268224348cd0101a
       url: "https://pub.dev"
     source: hosted
-    version: "67.0.0"
+    version: "61.0.0"
   analyzer:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: analyzer
-      sha256: "37577842a27e4338429a1cbc32679d508836510b056f1eedf0c8d20e39c1383d"
+      sha256: ea3d8652bda62982addfd92fdc2d0214e5f82e43325104990d4f4c4a2a313562
       url: "https://pub.dev"
     source: hosted
-    version: "6.4.1"
+    version: "5.13.0"
   archive:
     dependency: transitive
     description:
@@ -217,6 +217,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.10.0"
+  code_uml:
+    dependency: "direct main"
+    description:
+      name: code_uml
+      sha256: "69a53e5c5570834374d3b35ba8fe8f183865fce18781c8c712c811f18d6691b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   collection:
     dependency: transitive
     description:
@@ -261,10 +269,10 @@ packages:
     dependency: transitive
     description:
       name: dart_style
-      sha256: "99e066ce75c89d6b29903d788a7bb9369cf754f7b24bf70bf4b6d6d6b26853b9"
+      sha256: "1efa911ca7086affd35f463ca2fc1799584fb6aa89883cf0af8e3664d6a02d55"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.6"
+    version: "2.3.2"
   dartz:
     dependency: "direct main"
     description:
@@ -338,10 +346,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_adaptive_scaffold
-      sha256: "794791e6fc0cc23e375d07ea987e76cf7f0eb7cd753532e45dc35b7e90575e2d"
+      sha256: "56d4d81fe88ecffe8ae96b8d89a1ae793c0a85035bb9b74ff28f20eea0cdbdc2"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.11"
+    version: "0.1.11+1"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -476,10 +484,10 @@ packages:
     dependency: "direct main"
     description:
       name: jumping_dot
-      sha256: a2f755140da73d018bf5198acd83cdd2898a393e5ea45ee94250b9ba44566d1c
+      sha256: "031d8f45a41b95df7d7438f7ce5f3105503cbe5432b6c9dd10cf9b6f0a8d6472"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.6"
+    version: "0.0.7"
   leak_tracker:
     dependency: transitive
     description:
@@ -652,10 +660,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "9c96da072b421e98183f9ea7464898428e764bc0ce5567f27ec8693442e72514"
+      sha256: bca87b0165ffd7cdb9cad8edd22d18d2201e886d9a9f19b4fb3452ea7df3a72a
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.5"
+    version: "2.2.6"
   path_provider_foundation:
     dependency: transitive
     description:
@@ -796,34 +804,34 @@ packages:
     dependency: "direct main"
     description:
       name: record
-      sha256: "78353d3d55fa145ffe1db1f63232ad0a0cd4c773e9f7d161210ce796ba1c94f9"
+      sha256: "4a5cf4d083d1ee49e0878823c4397d073f8eb0a775f31215d388e2bc47a9e867"
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.1"
+    version: "5.1.2"
   record_android:
     dependency: transitive
     description:
       name: record_android
-      sha256: fe83beefc8ac81b9dd02ca9365e8685755e3f12be1d442964082f1d5b618183d
+      sha256: c15d7faffbbb8d3414e3062534fc125b445d2590327dc930636e7c70b8217733
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.3"
   record_darwin:
     dependency: transitive
     description:
       name: record_darwin
-      sha256: "2210da0fde7c86b4048cccfe2cd19b25fc7adf1ada7d50ec4a5ab4af2a863739"
+      sha256: b038c26d1066eb81f4e7433bfb85f0d450ca3fac0002a7216b83a21b775ecf21
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   record_linux:
     dependency: transitive
     description:
       name: record_linux
-      sha256: "7d0e70cd51635128fe9d37d89bafd6011d7cbba9af8dc323079ae60f23546aef"
+      sha256: "74d41a9ebb1eb498a38e9a813dd524e8f0b4fdd627270bda9756f437b110a3e3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   record_platform_interface:
     dependency: transitive
     description:
