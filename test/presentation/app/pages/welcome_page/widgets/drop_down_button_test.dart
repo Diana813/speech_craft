@@ -3,36 +3,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:speech_craft/presentation/app/pages/welcome_page/widgets/drop_down_button.dart';
 
 void main() {
-  testWidgets('DropDownButton renders correctly', (WidgetTester tester) async {
-    final List<String> elements = ['Option 1', 'Option 2', 'Option 3'];
-    String dropdownValue = elements.first;
+  testWidgets('AutocompleteField displays correctly and responds to user input', (WidgetTester tester) async {
+    final List<String> testElements = ['Apple', 'Banana', 'Cherry'];
+    String selectedOption = '';
+
+    void onChanged(String value) {
+      selectedOption = value;
+    }
 
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: DropDownButton(
-            elements: elements,
-            dropdownValue: dropdownValue,
-            onChanged: (value) {
-              dropdownValue = value;
-            },
+          body: AutocompleteField(
+            elements: testElements,
+            onChanged: onChanged,
+            labelText: 'Select a fruit',
           ),
         ),
       ),
     );
 
-    final dropDownButtonFinder = find.byType(DropDownButton);
-    expect(dropDownButtonFinder, findsOneWidget);
-    expect(find.text(dropdownValue), findsOneWidget);
+    expect(find.text('Select a fruit'), findsOneWidget);
 
-    await tester.tap(dropDownButtonFinder);
+    await tester.enterText(find.byType(TextField), 'Ap');
     await tester.pumpAndSettle();
 
-    final dropdownItem = find.text('Option 2').last;
+    expect(find.text('Apple'), findsOneWidget);
+    expect(find.text('Banana'), findsNothing);
+    expect(find.text('Cherry'), findsNothing);
 
-    await tester.tap(dropdownItem);
+    await tester.tap(find.text('Apple'));
     await tester.pumpAndSettle();
 
-    expect(dropdownValue, 'Option 2');
+    expect(selectedOption, 'Apple');
   });
 }

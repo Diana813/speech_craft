@@ -28,8 +28,6 @@ void main() {
           body: WelcomeScreenLarge(
             countries: countries,
             languages: languages,
-            countryDropdownValue: countryDropdownValue,
-            languageDropdownValue: languageDropdownValue,
             onCountryChanged: (value) {
               countryDropdownValue = value;
             },

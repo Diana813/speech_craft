@@ -14,10 +14,10 @@ void main() {
 
       //then
       expect(languages, isA<List<Language>>());
-      expect(languages.length, 184);
+      expect(languages.length, 181);
       expect(languages[0].name, 'Afar');
-      expect(languages[1].name, 'Abkhazian');
-      expect(languages[2].name, 'Avestan');
+      expect(languages[1].name, 'Abchaski');
+      expect(languages[2].name, 'Awestyjski');
     });
 
     test('getCountries should return a list of Country', () {
@@ -31,9 +31,9 @@ void main() {
       expect(countries, isA<List<Country>>());
       expect(
           countries.length, 240);
-      expect(countries[0].name, 'Afghanistan');
+      expect(countries[0].name, 'Afganistan');
       expect(countries[0].code, 'AF');
-      expect(countries[1].name, 'Åland Islands');
+      expect(countries[1].name, 'Wyspy Alandzkie');
       expect(countries[1].code, 'AX');
     });
   });

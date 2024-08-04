@@ -22,11 +22,7 @@ void main() {
     });
 
     test('getPauses should return a list of Timestamps', () async {
-      final mockResponse = http.Response(json.encode([
-        {'millis': 10.0},
-        {'millis': 45.0},
-        {'millis': 30.0},
-      ]), 200);
+      final mockResponse = http.Response(json.encode([10.0, 45.0, 30.0,]), 200);
       when(mockClient.get(any)).thenAnswer((_) async => mockResponse);
 
       final result = await dataSource.getPauses(videoId: 'abc123');

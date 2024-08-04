@@ -18,8 +18,6 @@ void main() {
       const LanguageEntity(name: 'Spanish', code: 'es'),
     ];
 
-    String countryDropdownValue = countries.first.country;
-    String languageDropdownValue = languages.first.name;
     String submittedSearchPhrase = '';
 
     await tester.pumpWidget(
@@ -28,13 +26,9 @@ void main() {
           body: WelcomeScreenSmall(
             countries: countries,
             languages: languages,
-            countryDropdownValue: countryDropdownValue,
-            languageDropdownValue: languageDropdownValue,
             onCountryChanged: (value) {
-              countryDropdownValue = value;
             },
             onLanguageChanged: (value) {
-              languageDropdownValue = value;
             },
             onSearchFrazeSubmitted: (value) {
               submittedSearchPhrase = value;

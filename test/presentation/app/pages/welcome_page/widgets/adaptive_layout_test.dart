@@ -15,8 +15,6 @@ void main() {
   group('SearchAdaptiveLayout', () {
     late List<RegionCodeEntity> countries;
     late List<LanguageEntity> languages;
-    late String countryDropdownValue;
-    late String languageDropdownValue;
     late Function onCountryChanged;
     late Function onLanguageChanged;
     late Function onSearchFrazeSubmitted;
@@ -30,8 +28,6 @@ void main() {
         const LanguageEntity(code: 'en', name: 'English'),
         const LanguageEntity(code: 'es', name: 'Spanish')
       ];
-      countryDropdownValue = 'United States';
-      languageDropdownValue = 'English';
       onCountryChanged = () {};
       onLanguageChanged = () {};
       onSearchFrazeSubmitted = () {};
@@ -44,8 +40,6 @@ void main() {
         child: SearchAdaptiveLayout(
           countries: countries,
           languages: languages,
-          countryDropdownValue: countryDropdownValue,
-          languageDropdownValue: languageDropdownValue,
           onCountryChanged: onCountryChanged,
           onLanguageChanged: onLanguageChanged,
           onSearchFrazeSubmitted: onSearchFrazeSubmitted,
