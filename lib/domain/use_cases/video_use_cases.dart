@@ -32,6 +32,7 @@ class UploadVideoUseCase extends UseCase<List<Timestamp>, VideoUrlParams> {
       return Right(ServerFailure());
     }
 
-    return await pausesRepository.getPauses(videoId: params.videoId);
+    final pauses =  await pausesRepository.getPauses(videoId: params.videoId);
+    return pauses;
   }
 }

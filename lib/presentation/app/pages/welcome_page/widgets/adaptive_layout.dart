@@ -9,8 +9,6 @@ import 'welcome_screen_small.dart';
 class SearchAdaptiveLayout extends StatelessWidget {
   final List<RegionCodeEntity> countries;
   final List<LanguageEntity> languages;
-  final String countryDropdownValue;
-  final String languageDropdownValue;
   final Function onCountryChanged;
   final Function onLanguageChanged;
   final Function onSearchFrazeSubmitted;
@@ -19,8 +17,6 @@ class SearchAdaptiveLayout extends StatelessWidget {
       {super.key,
       required this.countries,
       required this.languages,
-      required this.countryDropdownValue,
-      required this.languageDropdownValue,
       required this.onCountryChanged,
       required this.onLanguageChanged,
       required this.onSearchFrazeSubmitted});
@@ -36,8 +32,6 @@ class SearchAdaptiveLayout extends StatelessWidget {
               builder: (context) => WelcomeScreenSmall(
                 countries: countries,
                 languages: languages,
-                countryDropdownValue: countryDropdownValue,
-                languageDropdownValue: languageDropdownValue,
                 onCountryChanged: (value) => onCountryChanged(value),
                 onLanguageChanged: (value) => onLanguageChanged(value),
                 onSearchFrazeSubmitted: (value) =>
@@ -49,8 +43,6 @@ class SearchAdaptiveLayout extends StatelessWidget {
               builder: (context) => WelcomeScreenLarge(
                 countries: countries,
                 languages: languages,
-                countryDropdownValue: countryDropdownValue,
-                languageDropdownValue: languageDropdownValue,
                 onCountryChanged: (value) => onCountryChanged(value),
                 onLanguageChanged: (value) => onLanguageChanged(value),
                 onSearchFrazeSubmitted: (value) =>

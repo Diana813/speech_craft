@@ -7,8 +7,8 @@ const emptyResults = 'Brak danych';
 const apiFailureErrorMessage = 'Nie udało się pobrać danych.';
 const savingDataFailureMessage = 'Nie udało się zapisać danych';
 const generalErrorMessage = 'Coś poszło nie tak. Spróbuj ponownie.';
-const country = 'Kraj';
-const language = 'Język';
+const country = 'Wybierz kraj, z którego ma pochodzić nagranie (opcjonalnie)';
+const language = 'Wybierz język nagrania (opcjonalnie - jeśli inny niż wpisana fraza)';
 
 const String googleBaseUrl = 'www.googleapis.com';
 const String youtubeDataEndpoint = '/youtube/v3/search';
@@ -43,3 +43,4 @@ const pitch = "Wysokość tonu";
 
 const translation = "Tłumaczenie";
 const translationError = "Nie udało się przetłumaczyć :(";
+

@@ -5,7 +5,6 @@ import 'package:speech_craft/domain/entities/language_entity.dart';
 import 'package:speech_craft/presentation/app/pages/learning_page/widgets/lesson_sceen/providers/learning_page_wrapper_provider.dart';
 import 'package:speech_craft/presentation/app/pages/welcome_page/widgets/adaptive_layout.dart';
 
-import '../../../../common/strings.dart';
 import '../../../../domain/entities/region_code_entity.dart';
 import '../learning_page/cubit/resize_navigation/resize_navigation_cubit.dart';
 import 'cubit/query_params/query_params_cubit.dart';
@@ -18,14 +17,12 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<RegionCodeEntity> countries = [
-      const RegionCodeEntity(country: country, code: null)
+      const RegionCodeEntity(country: "-", code: null)
     ];
     final List<LanguageEntity> languages = [
-      const LanguageEntity(code: null, name: language)
+      const LanguageEntity(code: null, name: "-")
     ];
 
-    String countryDropdownValue = countries.first.country;
-    String languageDropdownValue = languages.first.name;
     LanguageEntity? languageEntity;
     RegionCodeEntity? countryEntity;
 
@@ -44,17 +41,13 @@ class WelcomePage extends StatelessWidget {
             countries.addAll(state.regionCodes);
             languages.addAll(state.languages);
           } else if (state is CountrySubmitted) {
-            countryDropdownValue = state.regionCode.country;
             countryEntity = state.regionCode;
           } else if (state is LanguageSubmitted) {
-            languageDropdownValue = state.language.name;
             languageEntity = state.language;
           }
           return SearchAdaptiveLayout(
               countries: countries,
               languages: languages,
-              countryDropdownValue: countryDropdownValue,
-              languageDropdownValue: languageDropdownValue,
               onCountryChanged: (value) =>
                   BlocProvider.of<QueryParamsCubit>(context).onCountrySubmitted(
                     country: RegionCodeEntity(

@@ -36,7 +36,8 @@ class PausesRemoteDataSourceImpl extends PausesRemoteDataSource {
     if (response.statusCode == 200) {
       List<dynamic> jsonList = json.decode(response.body);
       List<Timestamp> timestamps =
-          jsonList.map((json) => Timestamp.fromJson(json)).toList();
+      jsonList.map((millis) => Timestamp(millis: millis)).toList();
+
       return timestamps;
     } else {
       throw ServerException();

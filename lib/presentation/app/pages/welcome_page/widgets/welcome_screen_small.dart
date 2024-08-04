@@ -11,17 +11,12 @@ class WelcomeScreenSmall extends StatelessWidget {
       {super.key,
       required this.countries,
       required this.languages,
-      required this.countryDropdownValue,
-      required this.languageDropdownValue,
       required this.onCountryChanged,
       required this.onLanguageChanged,
       required this.onSearchFrazeSubmitted});
 
   final List<RegionCodeEntity> countries;
   final List<LanguageEntity> languages;
-
-  final String countryDropdownValue;
-  final String languageDropdownValue;
 
   final Function onCountryChanged;
   final Function onLanguageChanged;
@@ -39,9 +34,7 @@ class WelcomeScreenSmall extends StatelessWidget {
             children: [
               FilterButtons(
                 countries: countries.map((it) => it.country).toList(),
-                countryDropdownValue: countryDropdownValue,
                 languages: languages.map((it) => it.name).toList(),
-                languageDropdownValue: languageDropdownValue,
                 onCountryChanged: onCountryChanged,
                 onLanguageChanged: onLanguageChanged,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:speech_craft/common/strings.dart';
 
 import 'drop_down_button.dart';
 
@@ -6,17 +7,12 @@ class FilterButtons extends StatelessWidget {
   const FilterButtons(
       {super.key,
       required this.countries,
-      required this.countryDropdownValue,
       required this.languages,
-      required this.languageDropdownValue,
       required this.onCountryChanged,
       required this.onLanguageChanged});
 
   final List<String> countries;
   final List<String> languages;
-
-  final String countryDropdownValue;
-  final String languageDropdownValue;
 
   final Function onCountryChanged;
   final Function onLanguageChanged;
@@ -30,20 +26,20 @@ class FilterButtons extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(bottom: 8, right: 8),
-            child: DropDownButton(
+            child: AutocompleteField(
               elements: countries,
-              dropdownValue: countryDropdownValue,
               onChanged: (value) => onCountryChanged(value),
+              labelText: country,
             ),
           ),
         ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(bottom: 8.0, left: 8),
-            child: DropDownButton(
+            child: AutocompleteField(
               elements: languages,
-              dropdownValue: languageDropdownValue,
               onChanged: (value) => onLanguageChanged(value),
+              labelText: language,
             ),
           ),
         ),
