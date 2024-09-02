@@ -13,7 +13,6 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   final String videoId;
 
   late final VideoPlayer _videoPlayer;
-  late final StreamSubscription _videoPlayerSubscription;
   late final VideoPlayerHelper _videoHelper;
   int stopVideoTime = 0;
   int startVideoTime = 0;
@@ -25,7 +24,6 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
 
   @override
   Future<void> close() async {
-    await _videoPlayerSubscription.cancel();
     await _videoPlayer.dispose();
     _videoHelper.dispose();
     return super.close();

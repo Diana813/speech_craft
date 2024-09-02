@@ -18,6 +18,7 @@ class VideoRemoteDataSourceImpl extends VideoRemoteDataSource {
   @override
   Future<String> uploadVideoToCoreService({required String videoId}) async {
     String youtubeVideoUrl = '$youtubeUrl/watch?v=$videoId';
+    print("youtube video url: $youtubeVideoUrl");
 
     final host = kIsWeb
         ? '127.0.0.1'
