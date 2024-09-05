@@ -21,7 +21,7 @@ class PausesRemoteDataSourceImpl extends PausesRemoteDataSource {
   Future<List<Timestamp>> getPauses({required String videoId}) async {
     String youtubeVideoUrl = '$youtubeUrl/watch?v=$videoId';
 
-    final host = kIsWeb ? '127.0.0.1' : Platform.isAndroid ? '192.168.1.165' : '127.0.0.1';
+    final host = kIsWeb ? '127.0.0.1' : Platform.isAndroid ? '192.168.1.252' : '127.0.0.1';
 
     Uri url = Uri(
       scheme: 'http',

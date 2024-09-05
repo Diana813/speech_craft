@@ -26,10 +26,10 @@ class AudioHelper {
   }
 
   Future<void> play(String url) async {
-    await _player.play(UrlSource(url));
+      await _player.play(UrlSource(url));
   }
 
-  void dispose() {
+  void dispose() async {
     _player.dispose();
     _recorder.dispose();
   }
